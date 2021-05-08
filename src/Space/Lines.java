@@ -1,4 +1,4 @@
-package Space;
+//package Space;
 
 public class Lines { //x = xo + at,y=yo+bt, z= zo +ct
     private double xo;

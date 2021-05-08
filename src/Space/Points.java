@@ -1,4 +1,4 @@
-package Space;
+//package Space;
 
 public class Points{
     private double x; //1 point in Oxyz have 3 dimension (x,y,z)

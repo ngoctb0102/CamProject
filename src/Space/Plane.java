@@ -1,6 +1,7 @@
-package Space;
+//package Space;
 
 public class Plane { //Ax+By+Cz+D = 0
+    Cal c = new Cal();
     private double A;
     private double B;
     private double C;
@@ -40,5 +41,15 @@ public class Plane { //Ax+By+Cz+D = 0
         this.B = v.getVy();
         this.C = v.getVz();
         this.D = -A.getX()*v.getVx() - A.getY()*v.getVy() - A.getZ()*v.getVz(); 
+    }
+    public Plane(Points A, Points B, Points C){
+        Vector AB = new Vector(A,B);
+        Vector AC = new Vector(A,C);
+        Vector v = c.DirectedVec(AB,AC);
+        Plane P = new Plane(A,v);
+        this.A = P.getA();
+        this.B = P.getB();
+        this.C = P.getC();
+        this.D = P.getD();
     }
 }

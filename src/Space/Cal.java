@@ -1,5 +1,6 @@
-package Space;
+//package Space;
 
+import java.util.ArrayList;
 public class Cal {    //Calculate class
     //Get distance between 2 point
     public Double PointDistance(Points A, Points B){ 
@@ -92,6 +93,45 @@ public class Cal {    //Calculate class
             return A;
         }else{
             return null;
+        }
+    }
+    //get Area of Triangle
+    public Double GetTriArea(ArrayList<Points> p){
+        Points A = p.get(0);
+        Points B = p.get(1);
+        Points C = p.get(2);
+        double AB = PointDistance(A,B);
+        double BC = PointDistance(B,C);
+        double CA = PointDistance(C,A);
+        double peri = (AB+BC+CA)/2; //half of perimeter
+        return Math.sqrt(peri*(peri - AB)*(peri - BC)*(peri - CA));//herong 
+    }
+    //get Area of Quadrilateral
+    public Double GetQuaAre(ArrayList<Points> p){
+        Points t = p.remove(0);
+        ArrayList<Points> S1 = p;
+        p.add(t);
+        t = p.remove(1);
+        ArrayList<Points> S2 = p;
+        p.add(t);
+        t = p.remove(2);
+        ArrayList<Points> S3 = p;
+        p.add(t);
+        t = p.remove(3);
+        ArrayList<Points> S4 = p;
+        return (GetTriArea(S1) + GetTriArea(S2) + GetTriArea(S3) + GetTriArea(S4))/2;
+    }
+    //get Volume of pyramid
+    public Double GetVolPyr(ArrayList<Points> p,Points S){
+        Plane P = new Plane(p.get(0),p.get(1),p.get(2));
+        if(IsInPlane(S,P)){
+            return 0.0;
+        }else{
+            if(p.size() == 3){
+                return PointToPlane(S,P)*GetTriArea(p)/3;
+            }else{
+                return PointToPlane(S,P)*GetQuaAre(p)/3;
+            }
         }
     }
 }
