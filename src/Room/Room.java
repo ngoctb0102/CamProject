@@ -278,7 +278,14 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()-d,mT.getZ());
             c.b1 = B1;
             c.b2 = B2;
+        } 
+    }
+    public boolean checkInR(Points p){
+        if(0 <= p.getX() && p.getX() <= w && 0 <= p.getY() && p.getY() <= l && 0 <= p.getZ() && p.getZ() < h){
+            return true;
+        }else{
+            return false;
         }
-        
     }
 }
+
