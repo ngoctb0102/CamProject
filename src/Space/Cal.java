@@ -48,8 +48,8 @@ public class Cal {    //Calculate class
         Points A = new Points(a.getXo(),a.getYo(),a.getZo());
         Points B = new Points(b.getXo(),b.getYo(),b.getZo());
         Vector AB = new Vector(A,B);
-        Vector u1 = new Vector(a.getA(),a.getB(),a.getC());
-        Vector u2 = new Vector(b.getA(),b.getB(),b.getC());
+        Vector u1 = a.getVector();
+        Vector u2 = b.getVector();
         Vector Dir = DirectedVec(u1,u2);
         //[u1,u2] = 0 -> paralle or concident
         if(Dir.Distance() == 0){
@@ -134,4 +134,5 @@ public class Cal {    //Calculate class
             }
         }
     }
+
 }

@@ -1,9 +1,9 @@
 //package Space;
 
 public class Points{
-    private double x; //1 point in Oxyz have 3 dimension (x,y,z)
-    private double y; 
-    private double z;
+    protected double x; //1 point in Oxyz have 3 dimension (x,y,z)
+    protected double y; 
+    protected double z;
     private boolean state; //state = true : light || state = false : dark
     public double getX() {
         return x;

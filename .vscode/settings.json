@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "src/Space",
+        "src/Camera",
+        "src/Room"
+    ]
+}
