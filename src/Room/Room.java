@@ -13,7 +13,6 @@ public class Room {
     private ArrayList<Camera> Cams = new ArrayList<Camera>();
     //list of object
     private ArrayList<Object> Objs = new ArrayList<Object>();
-
     private final Plane Bot = new Plane(0,0,1,0); //z = 0
     private final Plane Left = new Plane(1,0,0,0); //x = 0
     private final Plane Right = new Plane(1,0,0,-w); //x = w 
@@ -38,7 +37,7 @@ public class Room {
     }
     //add Obj to Room
     public void addObj(Object o){
-        if(o.checkPosObj(0.0) || o.checkPosObj(h)){
+        if(checkObj(o)){
             Objs.add(o);
         }
     }
@@ -280,6 +279,7 @@ public class Room {
             c.b2 = B2;
         } 
     }
+    //check if point in room
     public boolean checkInR(Points p){
         if(0 <= p.getX() && p.getX() <= w && 0 <= p.getY() && p.getY() <= l && 0 <= p.getZ() && p.getZ() < h){
             return true;
@@ -287,5 +287,37 @@ public class Room {
             return false;
         }
     }
+    //check add Object
+    public boolean checkObj(Object o){
+        for(int i = 0;i<o.getPo().size();i++){
+            if(!checkInR(o.getPo().get(i))){
+                return false; //object is not in room
+            }
+        }
+        if(Objs.size() > 0){
+            for(int i = 0;i < Objs.size();i++){
+                if(Objs.get(i).checkInputObj(o) == 0){
+                    return false;
+                }
+            }
+            for(int i = 0;i < Objs.size();i++){
+                if(Objs.get(i).checkInputObj(o) == -1){
+                    return true;
+                }
+            }
+            if(o.checkPosObj(0.0) || o.checkPosObj(h)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if(o.checkPosObj(0.0) || o.checkPosObj(h)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
 }
 
