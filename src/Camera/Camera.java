@@ -26,11 +26,12 @@ public class Camera extends Points{
     }
     public Camera(double x, double y, double z, double angle, double lenght) {
         super(x, y, z);
-        Angle = Math.toRadians(angle); 
+        Angle = Math.toRadians(angle/2); 
         Lenght = lenght;
     }
     public boolean checkInCam(Points a){
         Points S = new Points(this.x,this.y,this.z);
+        S.print();
         ArrayList<Points> p = new ArrayList<Points>();
         p.add(t1);
         p.add(t2);
@@ -38,6 +39,7 @@ public class Camera extends Points{
         p.add(b2);
         //V of camera
         double v = cal.GetVolPyr(p, S);
+        System.out.println(v);
         ArrayList<Points> p1 = new ArrayList<Points>();
         ArrayList<Points> p2 = new ArrayList<Points>();
         ArrayList<Points> p3 = new ArrayList<Points>();
@@ -52,6 +54,7 @@ public class Camera extends Points{
         double v4 = cal.GetVolPyr(p4, a);
         double v5 = cal.GetVolPyr(p, a);
         double vS = v1 + v2 + v3 + v4 + v5;
+        System.out.println(v1 + " " + v2 + " " + v3 + " " + v4 + " "+v5+" "+ vS);
         if((double) Math.round(v*1000)/1000 == (double) Math.round(vS*1000)/1000){
             return true;
         }else{

@@ -51,5 +51,6 @@ public class Plane { //Ax+By+Cz+D = 0
         this.B = P.getB();
         this.C = P.getC();
         this.D = P.getD();
+        //System.out.println("is plane " + this.A+" " + this.B+" " + this.C + " " + this.D + " ");
     }
 }

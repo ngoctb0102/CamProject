@@ -36,4 +36,7 @@ public class Points{
     }
     public Points() {
     } 
+    public void print(){
+        System.out.println(x + " " + y + " " + z); 
+    }
 }

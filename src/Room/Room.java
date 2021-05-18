@@ -25,6 +25,12 @@ public class Room {
     private Plane Behind; //y = 0
     private Plane Front; //y = l
     private Plane Top;//z = h 
+    //get number of light point :>
+    private ArrayList<Points> lBot = new ArrayList<Points>();
+    private ArrayList<Points> lLeft = new ArrayList<Points>();
+    private ArrayList<Points> lRight = new ArrayList<Points>();
+    private ArrayList<Points> lBehind = new ArrayList<Points>();
+    private ArrayList<Points> lFront = new ArrayList<Points>();
     public Room(double l, double w, double h) {
         this.l = l;
         this.w = w;
@@ -38,10 +44,10 @@ public class Room {
     }
     //add camera to Room
     public void addCam(Camera c){
-        System.out.println(Top.getD());
         if(cal.IsInPlane(c,Top)){
             if(checkInR(c)){
                 Cams.add(c);
+                System.out.println("Added");
                 CamVision(c);
             }
         }
@@ -108,8 +114,8 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX(),mB.getY()+d,mT.getZ());
-            Points B2 = new Points(mB.getX(),mB.getY()-d,mT.getZ());
+            Points B1 = new Points(mB.getX(),mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 4){
@@ -132,8 +138,8 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX()+d,mB.getY(),mT.getZ());
-            Points B2 = new Points(mB.getX()-d,mB.getY(),mT.getZ());
+            Points B1 = new Points(mB.getX()+d,mB.getY(),mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 6){
@@ -156,8 +162,8 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX(),mB.getY()+d,mT.getZ());
-            Points B2 = new Points(mB.getX(),mB.getY()-d,mT.getZ());
+            Points B1 = new Points(mB.getX(),mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 8){
@@ -180,8 +186,8 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX()+d,mB.getY(),mT.getZ());
-            Points B2 = new Points(mB.getX()-d,mB.getY(),mT.getZ());
+            Points B1 = new Points(mB.getX()+d,mB.getY(),mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 1){ //in angle
@@ -206,8 +212,8 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX()+d,mB.getY()-d,mT.getZ());
-            Points B2 = new Points(mB.getX()-d,mB.getY()+d,mT.getZ());
+            Points B1 = new Points(mB.getX()+d,mB.getY()-d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 3){
@@ -232,34 +238,41 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX()+d,mB.getY()+d,mT.getZ());
-            Points B2 = new Points(mB.getX()-d,mB.getY()-d,mT.getZ());
+            Points B1 = new Points(mB.getX()+d,mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 5){
             double dz = c.getLenght()*Math.sin(c.getAngle());
             double dxy = c.getLenght()*Math.cos(c.getAngle())/Math.sqrt(2.0);
+            //System.out.println(dz + "  " + dxy);
             Points H = new Points(c.getX() - dxy,c.getY() - dxy,h - dz);
+            //H.print();
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
+            //T.print();
             //bot plane of camera
             Vector n = new Vector(c,H);
             Plane P = new Plane(H,n);
             //mid top insect
             Lines cT = new Lines(c,T);
             Points mT = cal.GetIntPoint(cT,P);
+            //mT.print();
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
+            //mB.print();
             //distance from mid too apex
             double d = c.getLenght()*Math.tan(c.getAngle())/Math.sqrt(2.0);
+            //mB.print();
+            //System.out.println("d = " + d);
             //get top apex
             Points T1 = new Points(mT.getX()+d,mT.getY()-d,mT.getZ());
             Points T2 = new Points(mT.getX()-d,mT.getY()+d,mT.getZ());
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX()+d,mB.getY()-d,mT.getZ());
-            Points B2 = new Points(mB.getX()-d,mB.getY()+d,mT.getZ());
+            Points B1 = new Points(mB.getX()+d,mB.getY()-d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 7){
@@ -284,8 +297,8 @@ public class Room {
             c.t1 = T1;
             c.t2 = T2;
             //get bbot apex
-            Points B1 = new Points(mB.getX()+d,mB.getY()+d,mT.getZ());
-            Points B2 = new Points(mB.getX()-d,mB.getY()-d,mT.getZ());
+            Points B1 = new Points(mB.getX()+d,mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
         } 
@@ -368,27 +381,34 @@ public class Room {
     //function check if point is light or not
     public boolean IsLight(Points a){
         if(!checkInR(a)){
+            System.out.println("not in room");
             return false;
         }else{
             if(checkInObj(a)){
                 return false;
             }else{
                 if(!checkInCamV(a)){
+                    System.out.println("not thing see");
                     return false;
                 }else{
                     ArrayList<Camera> cam = getCamSeeP(a);
                     for(int i = 0;i < cam.size();i++){
-                        if(Objs.size() > 0)
-                        {for(int j = 0;j < Objs.size();j++){
-                            if(!Objs.get(i).checkTwoPo(a, cam.get(i))){
-                                return true;
+                        if(Objs.size() > 0){
+                            for(int j = 0;j < Objs.size();j++){
+                                if(!Objs.get(i).checkTwoPo(a, cam.get(i))){
+                                    return true;
+                                }
                             }
-                        }}else{return true;}
+                        }else{
+                            return true;
+                        }
                     }
                     return false;
                 }
             }
         }
     }
+    //function get set of lighted points
+
 }
 

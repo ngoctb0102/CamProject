@@ -33,7 +33,7 @@ public class Cal {    //Calculate class
     }
     //x = b1c2 - b2c1, y = c1a2 - c2a1, z = a1b2 - a2b1
     public Vector DirectedVec(Vector v1, Vector v2){ 
-        double x = v1.getVy()*v2.getVz() - v2.getVy()*v2.getVz();
+        double x = v1.getVy()*v2.getVz() - v2.getVy()*v1.getVz();
         double y = v1.getVz()*v2.getVx() - v2.getVz()*v1.getVx();
         double z = v1.getVx()*v2.getVy() - v2.getVx()*v1.getVy();
         Vector v = new Vector(x,y,z);
@@ -86,7 +86,7 @@ public class Cal {    //Calculate class
     //get intersect point
     public Points GetIntPoint(Lines d, Plane P){
         double a = P.getA()*d.getA()+P.getB()*d.getB()+P.getC()*d.getC();
-        double b = P.getA()*d.getXo()+P.getB()*d.getYo()+P.getC()+d.getZo() + P.getD();
+        double b = P.getA()*d.getXo()+P.getB()*d.getYo()+P.getC()*d.getZo() + P.getD();
         if(RelLineToPlane(d,P) == 0){
             double t = -b/a;
             Points A = new Points(d.getXo()+d.getA()*t, d.getYo()+d.getB()*t,d.getZo()+d.getC()*t);
@@ -108,28 +108,33 @@ public class Cal {    //Calculate class
     }
     //get Area of Quadrilateral
     public double GetQuaAre(ArrayList<Points> p){
-        Points t = p.remove(0);
-        ArrayList<Points> S1 = p;
-        p.add(t);
-        t = p.remove(1);
-        ArrayList<Points> S2 = p;
-        p.add(t);
-        t = p.remove(2);
-        ArrayList<Points> S3 = p;
-        p.add(t);
-        t = p.remove(3);
-        ArrayList<Points> S4 = p;
+        Points A = p.get(0);
+        Points B = p.get(1);
+        Points C = p.get(2);
+        Points D = p.get(3);
+        ArrayList<Points> S1 = new ArrayList<Points>();
+        S1.add(A); S1.add(B); S1.add(C);
+        ArrayList<Points> S2 = new ArrayList<Points>();
+        S2.add(A); S2.add(B); S2.add(D);
+        ArrayList<Points> S3 = new ArrayList<Points>();
+        S3.add(A); S3.add(C); S3.add(D);
+        ArrayList<Points> S4 = new ArrayList<Points>();
+        S4.add(B); S4.add(D); S4.add(C);
         return (GetTriArea(S1) + GetTriArea(S2) + GetTriArea(S3) + GetTriArea(S4))/2;
     }
     //get Volume of pyramid
     public double GetVolPyr(ArrayList<Points> p,Points S){
         Plane P = new Plane(p.get(0),p.get(1),p.get(2));
+        //System.out.println("is one pyramid");
         if(IsInPlane(S,P)){
             return 0.0;
         }else{
+            //System.out.println(PointToPlane(S,P));
             if(p.size() == 3){
+                //System.out.println(GetTriArea(p));
                 return PointToPlane(S,P)*GetTriArea(p)/3;
             }else{
+                //System.out.println(GetQuaAre(p));
                 return PointToPlane(S,P)*GetQuaAre(p)/3;
             }
         }
