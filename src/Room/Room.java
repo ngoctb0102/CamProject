@@ -47,7 +47,7 @@ public class Room {
         if(cal.IsInPlane(c,Top)){
             if(checkInR(c)){
                 Cams.add(c);
-                System.out.println("Added");
+                System.out.println("Added Camera");
                 CamVision(c);
             }
         }
@@ -55,6 +55,7 @@ public class Room {
     //add Obj to Room
     public void addObj(Object o){
         if(checkObj(o)){
+            System.out.println("Added Obj");
             Objs.add(o);
         }
     }
@@ -349,10 +350,10 @@ public class Room {
         }else{
             for(int i = 0;i < Objs.size();i++){
                 if(Objs.get(i).checkInObj(a)){
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
     //check point in any cam vision ?
@@ -381,14 +382,15 @@ public class Room {
     //function check if point is light or not
     public boolean IsLight(Points a){
         if(!checkInR(a)){
-            System.out.println("not in room");
+            //System.out.println("not in room");
             return false;
         }else{
             if(checkInObj(a)){
+                //System.out.println("Is in obj");
                 return false;
             }else{
                 if(!checkInCamV(a)){
-                    System.out.println("not thing see");
+                    //System.out.println("not thing see");
                     return false;
                 }else{
                     ArrayList<Camera> cam = getCamSeeP(a);
@@ -409,6 +411,26 @@ public class Room {
         }
     }
     //function get set of lighted points
-
+    public double getVolLighted(){
+        ArrayList<Points> lPoints = new ArrayList<Points>();
+        //start point
+        double t = 0;
+        for(int i = 0;i<100;i++){
+            for(int j = 0;j<100;j++){
+                for(int k = 0;k<100;k++){
+                    Points T = new Points(t+w*(double)k/100,t+l*(double)j/100,t+h*(double)i/100);
+                    if(IsLight(T)){
+                        lPoints.add(T);
+                    }
+                }
+            }
+        }
+        return lPoints.size();
+    }
+    //function get lighted are percentage
+    public double perLighter(){
+        double re = getVolLighted()/10000;
+        return Math.round(re*100)/100;
+    }
 }
 

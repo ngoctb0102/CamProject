@@ -13,7 +13,7 @@ public class Object {
     Points B1;
     Points C1;
     Points D1;
-    private ArrayList<Points> po; //list of object's apex
+    private ArrayList<Points> po = new ArrayList<Points>(); //list of object's apex
     private double h;
     ArrayList<Points> p1 = new ArrayList<Points>();
     Plane P1;

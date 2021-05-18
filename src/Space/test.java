@@ -12,5 +12,8 @@ public class test {
         ArrayList<Points> p = new ArrayList<Points>();
         p.add(A); p.add(B); p.add(C); p.add(D);
         System.out.println(c.GetVolPyr(p, S));
+        double t = 0;
+        t = t + (double)1/100;
+        System.out.println(t);
     }
 }
