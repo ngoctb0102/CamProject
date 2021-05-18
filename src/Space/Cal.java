@@ -3,17 +3,17 @@
 import java.util.ArrayList;
 public class Cal {    //Calculate class
     //Get distance between 2 point
-    public Double PointDistance(Points A, Points B){ 
+    public double PointDistance(Points A, Points B){ 
         Vector v = new Vector(A,B);
         return v.Distance();
     }
     //Get distance from point to Plane
-    public Double PointToPlane(Points A, Plane P){
+    public double PointToPlane(Points A, Plane P){
         double dis = Math.sqrt(P.getA()*P.getA()+P.getB()*P.getB()+P.getC()*P.getC());
         return Math.abs(P.getA()*A.getX()+P.getB()*A.getY()+P.getC()*A.getZ()+P.getD())/dis;
     }
     //check points in line
-    public Boolean IsInLine(Points A, Lines d){
+    public boolean IsInLine(Points A, Lines d){
         double t = (A.getX() - d.getXo())/d.getA();
         double y = d.getB()*t + d.getYo();
         double z = d.getC()*t + d.getZo();
@@ -24,8 +24,8 @@ public class Cal {    //Calculate class
         }
     }
     //check points in plane
-    public Boolean IsInPlane(Points A,Plane P){
-        if(PointToPlane(A,P) == 0){
+    public boolean IsInPlane(Points A,Plane P){
+        if(PointToPlane(A,P) == 0.0){
             return true;
         }else{
             return false;
@@ -40,11 +40,11 @@ public class Cal {    //Calculate class
         return v;
     }
     //v1*v2 = x1x2 + y1y2 + z1z2
-    public Double ScalarVec(Vector v1, Vector v2){ 
+    public double ScalarVec(Vector v1, Vector v2){ 
         return v1.getVx()*v2.getVx()+v1.getVy()*v2.getVy()+v1.getVz()*v2.getVz();
     }
     //Get relative position of 2 lines
-    public Integer RelPosLine(Lines a, Lines b){
+    public int RelPosLine(Lines a, Lines b){
         Points A = new Points(a.getXo(),a.getYo(),a.getZo());
         Points B = new Points(b.getXo(),b.getYo(),b.getZo());
         Vector AB = new Vector(A,B);
@@ -96,7 +96,7 @@ public class Cal {    //Calculate class
         }
     }
     //get Area of Triangle
-    public Double GetTriArea(ArrayList<Points> p){
+    public double GetTriArea(ArrayList<Points> p){
         Points A = p.get(0);
         Points B = p.get(1);
         Points C = p.get(2);
@@ -107,7 +107,7 @@ public class Cal {    //Calculate class
         return Math.sqrt(peri*(peri - AB)*(peri - BC)*(peri - CA));//herong 
     }
     //get Area of Quadrilateral
-    public Double GetQuaAre(ArrayList<Points> p){
+    public double GetQuaAre(ArrayList<Points> p){
         Points t = p.remove(0);
         ArrayList<Points> S1 = p;
         p.add(t);
@@ -122,7 +122,7 @@ public class Cal {    //Calculate class
         return (GetTriArea(S1) + GetTriArea(S2) + GetTriArea(S3) + GetTriArea(S4))/2;
     }
     //get Volume of pyramid
-    public Double GetVolPyr(ArrayList<Points> p,Points S){
+    public double GetVolPyr(ArrayList<Points> p,Points S){
         Plane P = new Plane(p.get(0),p.get(1),p.get(2));
         if(IsInPlane(S,P)){
             return 0.0;

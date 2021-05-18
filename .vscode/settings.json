@@ -1,9 +1,12 @@
 {
     "java.project.sourcePaths": [
+        "src/UserInterface",
         "src/Space",
         "src/Room",
         "src/Camera",
-        "src/UserInterface"
+        "main",
+        "src",
+        "src/App.java"
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",

@@ -11,27 +11,38 @@ public class Room {
     private double h;
     //list of camera
     private ArrayList<Camera> Cams = new ArrayList<Camera>();
+    public ArrayList<Camera> getCams() {
+        return Cams;
+    }
+    public void setCams(ArrayList<Camera> cams) {
+        Cams = cams;
+    }
     //list of object
     private ArrayList<Object> Objs = new ArrayList<Object>();
-    private final Plane Bot = new Plane(0,0,1,0); //z = 0
-    private final Plane Left = new Plane(1,0,0,0); //x = 0
-    private final Plane Right = new Plane(1,0,0,-w); //x = w 
-    private final Plane Behind = new Plane(0,1,0,0); //y = 0
-    private final Plane Front = new Plane(0,1,0,-l); //y = l
-    private final Plane Top = new Plane(0,0,1,-h);//z = h 
+    private Plane Bot; //z = 0
+    private Plane Left; //x = 0
+    private Plane Right; //x = w 
+    private Plane Behind; //y = 0
+    private Plane Front; //y = l
+    private Plane Top;//z = h 
     public Room(double l, double w, double h) {
         this.l = l;
         this.w = w;
         this.h = h;
+        Bot = new Plane(0,0,1,0); //z = 0
+        Left = new Plane(1,0,0,0); //x = 0
+        Right = new Plane(1,0,0,0.0-w); //x = w 
+        Behind = new Plane(0,1,0,0); //y = 0
+        Front = new Plane(0,1,0,0.0-l); //y = l
+        Top = new Plane(0,0,1,0.0-h);//z = h 
     }
     //add camera to Room
     public void addCam(Camera c){
+        System.out.println(Top.getD());
         if(cal.IsInPlane(c,Top)){
-            if(c.getX() >= 0.0 && c.getY() <= w){
-                if(c.getY() >= 0.0 && c.getY() <= l){
-                    Cams.add(c); //check if cam in room
-                    CamVision(c);
-                }
+            if(checkInR(c)){
+                Cams.add(c);
+                CamVision(c);
             }
         }
     }
@@ -281,7 +292,7 @@ public class Room {
     }
     //check if point in room
     public boolean checkInR(Points p){
-        if(0 <= p.getX() && p.getX() <= w && 0 <= p.getY() && p.getY() <= l && 0 <= p.getZ() && p.getZ() < h){
+        if(0 <= p.getX() && p.getX() <= w && 0 <= p.getY() && p.getY() <= l && 0 <= p.getZ() && p.getZ() <= h){
             return true;
         }else{
             return false;
@@ -356,7 +367,7 @@ public class Room {
     }
     //function check if point is light or not
     public boolean IsLight(Points a){
-        if(checkInR(a)){
+        if(!checkInR(a)){
             return false;
         }else{
             if(checkInObj(a)){
@@ -367,11 +378,12 @@ public class Room {
                 }else{
                     ArrayList<Camera> cam = getCamSeeP(a);
                     for(int i = 0;i < cam.size();i++){
-                        for(int j = 0;j < Objs.size();j++){
+                        if(Objs.size() > 0)
+                        {for(int j = 0;j < Objs.size();j++){
                             if(!Objs.get(i).checkTwoPo(a, cam.get(i))){
                                 return true;
                             }
-                        }
+                        }}else{return true;}
                     }
                     return false;
                 }
