@@ -318,6 +318,65 @@ public class Room {
             }
         }
     }
-    
+    //check point in any obj ?
+    public boolean checkInObj(Points a){
+        if(Objs.size() == 0){
+            return false;
+        }else{
+            for(int i = 0;i < Objs.size();i++){
+                if(Objs.get(i).checkInObj(a)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    //check point in any cam vision ?
+    public boolean checkInCamV(Points a){
+        if(Cams.size() == 0){
+            return false;
+        }else{
+            for(int i = 0;i<Cams.size();i++){
+                if(Cams.get(i).checkInCam(a)){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    //get every cam in CamVision
+    public ArrayList<Camera> getCamSeeP(Points a){
+        ArrayList<Camera> cam = new ArrayList<Camera>();
+        for(int i = 0;i<Cams.size();i++){
+            if(Cams.get(i).checkInCam(a)){
+                cam.add(Cams.get(i));
+            }
+        }
+        return cam;
+    }
+    //function check if point is light or not
+    public boolean IsLight(Points a){
+        if(checkInR(a)){
+            return false;
+        }else{
+            if(checkInObj(a)){
+                return false;
+            }else{
+                if(!checkInCamV(a)){
+                    return false;
+                }else{
+                    ArrayList<Camera> cam = getCamSeeP(a);
+                    for(int i = 0;i < cam.size();i++){
+                        for(int j = 0;j < Objs.size();j++){
+                            if(!Objs.get(i).checkTwoPo(a, cam.get(i))){
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+    }
 }
 

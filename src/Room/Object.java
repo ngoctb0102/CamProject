@@ -1,6 +1,8 @@
 //package Room;
 //import Space.*;
 import java.util.ArrayList;
+
+import javafx.scene.shape.Line;
 public class Object {
     Cal cal = new Cal();
     Points A;
@@ -13,6 +15,18 @@ public class Object {
     Points D1;
     private ArrayList<Points> po; //list of object's apex
     private double h;
+    ArrayList<Points> p1 = new ArrayList<Points>();
+    Plane P1;
+    ArrayList<Points> p2 = new ArrayList<Points>();
+    Plane P2;
+    ArrayList<Points> p3 = new ArrayList<Points>();
+    Plane P3;
+    ArrayList<Points> p4 = new ArrayList<Points>();
+    Plane P4;
+    ArrayList<Points> p5 = new ArrayList<Points>();
+    Plane P5;
+    ArrayList<Points> p6 = new ArrayList<Points>();
+    Plane P6;
     public Points getA() {
         return A;
     }
@@ -63,6 +77,18 @@ public class Object {
         po.add(B); po.add(B1);
         po.add(C); po.add(C1);
         po.add(D); po.add(D1);
+        p1.add(A); p1.add(B); p1.add(C); p1.add(D); // ABCD
+        P1 = new Plane(A,B,C);
+        p2.add(A1); p2.add(B1); p2.add(C1); p2.add(D1); //A1B1C1D1
+        P2 = new Plane(A1,B1,C1);
+        p3.add(A); p3.add(A1); p3.add(B); p3.add(B1); //ABA1B1
+        P3 = new Plane(A,A1,B);
+        p4.add(A); p4.add(A1); p4.add(D); p4.add(D1); //ADA1D1
+        P4 = new Plane(A,A1,D);
+        p5.add(C); p5.add(C1); p5.add(B); p5.add(B1); //CBC1D1
+        P5 = new Plane(C,C1,B);
+        p6.add(C); p6.add(C1); p6.add(D); p6.add(D1); //CDC1D1
+        P6 = new Plane(C,C1,D);
     }
     //ccheck where is object
     public boolean checkPosObj(double z){
@@ -78,24 +104,7 @@ public class Object {
     }
     //check if point in object
     public boolean checkInObj(Points m){
-        ArrayList<Points> p = new ArrayList<Points>();
-        p.add(A);
-        p.add(B);
-        p.add(C);
-        p.add(D);
-        double v = cal.GetQuaAre(p)*h;
-        ArrayList<Points> p1 = new ArrayList<Points>();
-        p1.add(A); p1.add(B); p1.add(C); p1.add(D); // ABCD
-        ArrayList<Points> p2 = new ArrayList<Points>();
-        p2.add(A1); p2.add(B1); p2.add(C1); p2.add(D1); //A1B1C1D1
-        ArrayList<Points> p3 = new ArrayList<Points>();
-        p3.add(A); p3.add(A1); p3.add(B); p3.add(B1); //ABA1B1
-        ArrayList<Points> p4 = new ArrayList<Points>();
-        p4.add(A); p4.add(A1); p4.add(D); p4.add(D1); //ADA1D1
-        ArrayList<Points> p5 = new ArrayList<Points>();
-        p5.add(C); p5.add(C1); p5.add(B); p5.add(B1); //CBC1D1
-        ArrayList<Points> p6 = new ArrayList<Points>();
-        p6.add(C); p6.add(C1); p6.add(D); p6.add(D1); //CDC1D1
+        double v = cal.GetQuaAre(p1)*h;
         double v1 = cal.GetVolPyr(p1, m);
         double v2 = cal.GetVolPyr(p2, m);
         double v3 = cal.GetVolPyr(p3, m);
@@ -135,5 +144,37 @@ public class Object {
                 return 0; //in
             }
         }
+    }
+    //check if point in objplane
+    public boolean checkOnObjPlane(Points a){
+        if(cal.GetVolPyr(p4, a) == 0.0 || cal.GetVolPyr(p1, a) == 0.0 || cal.GetVolPyr(p2,a) == 0.0 || 
+        cal.GetVolPyr(p3, a) == 0.0 || cal.GetVolPyr(p5,a) == 0.0 || cal.GetVolPyr(p6, a) == 0.0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //check if two points is hidden by object
+    public boolean checkTwoPo(Points a, Points b){
+        Lines d = new Lines(a,b);
+        ArrayList<Points> h = new ArrayList<Points>();
+        h.add(cal.GetIntPoint(d, P1));
+        h.add(cal.GetIntPoint(d, P2));
+        h.add(cal.GetIntPoint(d, P3));
+        h.add(cal.GetIntPoint(d, P4));
+        h.add(cal.GetIntPoint(d, P5));
+        h.add(cal.GetIntPoint(d, P6));
+        double ab = cal.PointDistance(a, b);
+        for(int i = 0;i <h.size();i++){
+            if(h.get(i)!=null){
+                if(checkInObj(h.get(i))){
+                    double dab = cal.PointDistance(a, h.get(i)) + cal.PointDistance(b, h.get(i));
+                    if((double) Math.round(ab*100)/100 == (double) Math.round(dab*100)/100){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
