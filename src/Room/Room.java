@@ -27,7 +27,6 @@ public class Room {
     private Plane Front; //y = l
     private Plane Top;//z = h 
     //get number of light point :>
-    private ArrayList<Points> lBot = new ArrayList<Points>();
     private ArrayList<Points> lLeft = new ArrayList<Points>();
     private ArrayList<Points> lRight = new ArrayList<Points>();
     private ArrayList<Points> lBehind = new ArrayList<Points>();
@@ -437,12 +436,10 @@ public class Room {
     //function get set of lighted points
     public double getVolLighted(){
         ArrayList<Points> lPoints = new ArrayList<Points>();
-        //start point
-        double t = 0;
         for(int i = 0;i<100;i++){
             for(int j = 0;j<100;j++){
                 for(int k = 0;k<100;k++){
-                    Points T = new Points(t+w*(double)k/100,t+l*(double)j/100,t+h*(double)i/100);
+                    Points T = new Points(w*(double)k/100,l*(double)j/100,h*(double)i/100);
                     if(IsLight(T)){
                         lPoints.add(T);
                     }
@@ -456,5 +453,92 @@ public class Room {
         double re = getVolLighted()/10000;
         return Math.round(re*100)/100;
     }
+    //function get point is in Object
+    public double getInObj(){
+        ArrayList<Points> inObj = new ArrayList<Points>();
+        for(int i = 0;i<100;i++){
+            for(int j = 0;j<100;j++){
+                for(int k = 0;k<100;k++){
+                    Points T = new Points(w*(double)k/100,l*(double)j/100,h*(double)i/100);
+                    if(checkInObj(T)){
+                        inObj.add(T);
+                    }
+                }
+            }
+        }
+        return inObj.size();
+    }
+    //function get percentage lighted with object dark
+    public double perLight(){
+        double v = 1000000 - getInObj();
+        double re = getVolLighted()*100/v;
+        return Math.round(re*100)/100;
+    }
+    //function get lighted Bot z = 0
+    public ArrayList<Points> lBot(){
+        ArrayList<Points> lBot = new ArrayList<Points>();
+        for(int i = 0;i < 500;i++ ){
+            for(int j = 0; j < 500;j++){
+                Points a = new Points(w*(double)i/1000,l*(double)j/1000,0);
+                if(IsLight(a)){
+                    lBot.add(a);
+                }
+            }
+        }
+        return lBot;
+    }
+    //function get lighted right x = w
+    public ArrayList<Points> lRight(){
+        ArrayList<Points> lRight = new ArrayList<Points>();
+        for(int i = 0;i < 1000;i++ ){
+            for(int j = 0; j < 1000;j++){
+                Points a = new Points(w,l*(double)i/1000,h*(double)j/1000);
+                if(IsLight(a)){
+                    lRight.add(a);
+                }
+            }
+        }
+        return lRight;
+    }
+    //f get left x = 0
+    public ArrayList<Points> lLeft(){
+        ArrayList<Points> lLeft = new ArrayList<Points>();
+        for(int i = 0;i < 1000;i++ ){
+            for(int j = 0; j < 1000;j++){
+                Points a = new Points(0,l*(double)i/1000,h*(double)j/1000);
+                if(IsLight(a)){
+                    lLeft.add(a);
+                }
+            }
+        }
+        return lLeft;
+    }
+    //f get behind y = 0
+    public ArrayList<Points> lBehind(){
+        ArrayList<Points> lBehind = new ArrayList<Points>();
+        for(int i = 0;i < 1000;i++ ){
+            for(int j = 0; j < 1000;j++){
+                Points a = new Points(w*(double)i/1000,0,h*(double)j/1000);
+                if(IsLight(a)){
+                    lBehind.add(a);
+                }
+            }
+        }
+        return lBehind;
+    }
+    //f get front y = l
+    public ArrayList<Points> lFront(){
+        ArrayList<Points> lFront = new ArrayList<Points>();
+        for(int i = 0;i < 1000;i++ ){
+            for(int j = 0; j < 1000;j++){
+                Points a = new Points(w*(double)i/1000,l,h*(double)j/1000);
+                if(IsLight(a)){
+                    lFront.add(a);
+                }
+            }
+        }
+        return lFront;
+    }
+
 }
 

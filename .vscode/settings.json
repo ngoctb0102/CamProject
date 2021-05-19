@@ -3,6 +3,7 @@
         "src/UserInterface",
         "src/Space",
         "src/Room",
+        "src/Draw2D",
         "src/Camera",
         "main",
         "src",

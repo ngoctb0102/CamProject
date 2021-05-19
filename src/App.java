@@ -18,6 +18,7 @@ public class App {
         Object o1 = new Object(A1,B1,C1,D1,8);
         r.addObj(o1);
         System.out.println(r.IsLight(new Points(18,0,0)));
-        System.out.println(r.perLighter() + "%");
+        //System.out.println(r.perLighter() + "%");
+        System.out.println(r.lBot().size());
     }
 }
