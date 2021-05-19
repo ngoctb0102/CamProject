@@ -37,6 +37,12 @@ public class Camera extends Points{
         lAngle = Math.toRadians(langle/2);
         Lenght = lenght;
     }
+    public Camera(double x, double y, double z, double hangle, double langle){
+        super(x, y, z);
+        hAngle = Math.toRadians(hangle/2); 
+        lAngle = Math.toRadians(langle/2);
+        Lenght = 1000;
+    }
     public boolean checkInCam(Points a){
         Points S = new Points(this.x,this.y,this.z);
         //S.print();
