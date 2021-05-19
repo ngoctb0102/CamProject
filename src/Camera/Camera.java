@@ -6,27 +6,35 @@ import java.util.ArrayList;
 public class Camera extends Points{
     //get angle in radian
     Cal cal = new Cal();
-    private double Angle; 
+    private double hAngle; 
+    private double lAngle;
+    public double gethAngle() {
+        return hAngle;
+    }
+    public void sethAngle(double hAngle) {
+        this.hAngle = hAngle;
+    }
+    public double getlAngle() {
+        return lAngle;
+    }
+    public void setlAngle(double lAngle) {
+        this.lAngle = lAngle;
+    }
     private double Lenght;
     Points t1 = new Points();
     Points t2 = new Points(); // 2 points on top
     Points b1 = new Points(); // 2 points under top 
     Points b2 = new Points();
-    public double getAngle() {
-        return Angle;
-    }
-    public void setAngle(int angle) {
-        Angle = angle;
-    }
     public double getLenght() {
         return Lenght;
     }
     public void setLenght(double lenght) {
         Lenght = lenght;
     }
-    public Camera(double x, double y, double z, double angle, double lenght) {
+    public Camera(double x, double y, double z, double hangle, double langle, double lenght) {
         super(x, y, z);
-        Angle = Math.toRadians(angle/2); 
+        hAngle = Math.toRadians(hangle/2); 
+        lAngle = Math.toRadians(langle/2);
         Lenght = lenght;
     }
     public boolean checkInCam(Points a){

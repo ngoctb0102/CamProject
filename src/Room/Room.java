@@ -1,6 +1,7 @@
 //package Room;
 //import Space.*;
 import java.lang.*;
+import java.util.*;
 import java.util.ArrayList;
 
 //import Camera.Camera;
@@ -41,6 +42,29 @@ public class Room {
         Behind = new Plane(0,1,0,0); //y = 0
         Front = new Plane(0,1,0,0.0-l); //y = l
         Top = new Plane(0,0,1,0.0-h);//z = h 
+    }
+    public Room(Points a, Points b, Points c, Points d, Points e, Points f, Points g, Points h){
+        List<Double> width = new ArrayList<Double>(); 
+        width.add(a.getX()); width.add(b.getX()); width.add(c.getX()); width.add(d.getX());
+        width.add(e.getX()); width.add(f.getX()); width.add(g.getX()); width.add(h.getX());
+        double wi = Collections.max(width);
+        List<Double> lenght = new ArrayList<Double>();
+        lenght.add(a.getY()); lenght.add(b.getY()); lenght.add(c.getY()); lenght.add(d.getY());
+        lenght.add(e.getY()); lenght.add(f.getY()); lenght.add(g.getY()); lenght.add(h.getY());
+        double le = Collections.max(lenght);
+        List<Double> height = new ArrayList<Double>();
+        height.add(a.getZ()); height.add(b.getZ()); height.add(c.getZ()); height.add(d.getZ());
+        height.add(e.getZ()); height.add(f.getZ()); height.add(g.getZ()); height.add(h.getZ());
+        double he = Collections.max(height);
+        this.l = le;
+        this.w = wi;
+        this.h = he;
+        Bot = new Plane(0,0,1,0); //z = 0
+        Left = new Plane(1,0,0,0); //x = 0
+        Right = new Plane(1,0,0,0.0-wi); //x = w 
+        Behind = new Plane(0,1,0,0); //y = 0
+        Front = new Plane(0,1,0,0.0-le); //y = l
+        Top = new Plane(0,0,1,0.0-he);//z = h
     }
     //add camera to Room
     public void addCam(Camera c){
@@ -96,7 +120,7 @@ public class Room {
         //in left x = 0
         if(CheckCam(c) == 2){
             //get center of camera
-            Points H = new Points(c.getLenght()*Math.cos(c.getAngle()),c.getY(),h - c.getLenght()*Math.sin(c.getAngle()));
+            Points H = new Points(c.getLenght()*Math.cos(c.gethAngle()),c.getY(),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
             //bot plane of camera
@@ -108,7 +132,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle());
+            double d = c.getLenght()*Math.tan(c.getlAngle());
             //get top apex
             Points T1 = new Points(mT.getX(),mT.getY()+d,mT.getZ());
             Points T2 = new Points(mT.getX(),mT.getY()-d,mT.getZ());
@@ -120,7 +144,7 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 4){
-            Points H = new Points(c.getX(),l - c.getLenght()*Math.cos(c.getAngle()),h - c.getLenght()*Math.sin(c.getAngle()));
+            Points H = new Points(c.getX(),l - c.getLenght()*Math.cos(c.gethAngle()),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
             //bot plane of camera
@@ -132,7 +156,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle());
+            double d = c.getLenght()*Math.tan(c.getlAngle());
             //get top apex
             Points T1 = new Points(mT.getX()+d,mT.getY(),mT.getZ());
             Points T2 = new Points(mT.getX()-d,mT.getY(),mT.getZ());
@@ -144,7 +168,7 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 6){
-            Points H = new Points(w - c.getLenght()*Math.cos(c.getAngle()),c.getY(),h - c.getLenght()*Math.sin(c.getAngle()));
+            Points H = new Points(w - c.getLenght()*Math.cos(c.gethAngle()),c.getY(),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
             //bot plane of camera
@@ -156,7 +180,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle());
+            double d = c.getLenght()*Math.tan(c.getlAngle());
             //get top apex
             Points T1 = new Points(mT.getX(),mT.getY()+d,mT.getZ());
             Points T2 = new Points(mT.getX(),mT.getY()-d,mT.getZ());
@@ -168,7 +192,7 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 8){
-            Points H = new Points(c.getX(),c.getLenght()*Math.cos(c.getAngle()),h - c.getLenght()*Math.sin(c.getAngle()));
+            Points H = new Points(c.getX(),c.getLenght()*Math.cos(c.gethAngle()),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
             //bot plane of camera
@@ -180,7 +204,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle());
+            double d = c.getLenght()*Math.tan(c.getlAngle());
             //get top apex
             Points T1 = new Points(mT.getX()+d,mT.getY(),mT.getZ());
             Points T2 = new Points(mT.getX()-d,mT.getY(),mT.getZ());
@@ -192,8 +216,8 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 1){ //in angle
-            double dz = c.getLenght()*Math.sin(c.getAngle());
-            double dxy = c.getLenght()*Math.cos(c.getAngle())/Math.sqrt(2.0);
+            double dz = c.getLenght()*Math.sin(c.gethAngle());
+            double dxy = c.getLenght()*Math.cos(c.gethAngle())/Math.sqrt(2.0);
             Points H = new Points(c.getX() + dxy,c.getY() + dxy,h - dz);
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
@@ -206,7 +230,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle())/Math.sqrt(2.0);
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
             //get top apex
             Points T1 = new Points(mT.getX()+d,mT.getY()-d,mT.getZ());
             Points T2 = new Points(mT.getX()-d,mT.getY()+d,mT.getZ());
@@ -218,8 +242,8 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 3){
-            double dz = c.getLenght()*Math.sin(c.getAngle());
-            double dxy = c.getLenght()*Math.cos(c.getAngle())/Math.sqrt(2.0);
+            double dz = c.getLenght()*Math.sin(c.gethAngle());
+            double dxy = c.getLenght()*Math.cos(c.gethAngle())/Math.sqrt(2.0);
             Points H = new Points(c.getX() + dxy,c.getY() - dxy,h - dz);
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
@@ -232,7 +256,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle())/Math.sqrt(2.0);
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
             //get top apex
             Points T1 = new Points(mT.getX()+d,mT.getY()+d,mT.getZ());
             Points T2 = new Points(mT.getX()-d,mT.getY()-d,mT.getZ());
@@ -244,8 +268,8 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 5){
-            double dz = c.getLenght()*Math.sin(c.getAngle());
-            double dxy = c.getLenght()*Math.cos(c.getAngle())/Math.sqrt(2.0);
+            double dz = c.getLenght()*Math.sin(c.gethAngle());
+            double dxy = c.getLenght()*Math.cos(c.gethAngle())/Math.sqrt(2.0);
             //System.out.println(dz + "  " + dxy);
             Points H = new Points(c.getX() - dxy,c.getY() - dxy,h - dz);
             //H.print();
@@ -263,7 +287,7 @@ public class Room {
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //mB.print();
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle())/Math.sqrt(2.0);
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
             //mB.print();
             //System.out.println("d = " + d);
             //get top apex
@@ -277,8 +301,8 @@ public class Room {
             c.b1 = B1;
             c.b2 = B2;
         }else if(CheckCam(c) == 7){
-            double dz = c.getLenght()*Math.sin(c.getAngle());
-            double dxy = c.getLenght()*Math.cos(c.getAngle())/Math.sqrt(2.0);
+            double dz = c.getLenght()*Math.sin(c.gethAngle());
+            double dxy = c.getLenght()*Math.cos(c.getlAngle())/Math.sqrt(2.0);
             Points H = new Points(c.getX() - dxy,c.getY() + dxy,h - dz);
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
@@ -291,7 +315,7 @@ public class Room {
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
             //distance from mid too apex
-            double d = c.getLenght()*Math.tan(c.getAngle())/Math.sqrt(2.0);
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
             //get top apex
             Points T1 = new Points(mT.getX()+d,mT.getY()+d,mT.getZ());
             Points T2 = new Points(mT.getX()-d,mT.getY()-d,mT.getZ());

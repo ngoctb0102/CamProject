@@ -90,6 +90,35 @@ public class Object {
         p6.add(C); p6.add(C1); p6.add(D); p6.add(D1); //CDC1D1
         P6 = new Plane(C,C1,D);
     }
+    public Object(Points a, Points b, Points c, Points d, Points e, Points f, Points g, Points h){
+        Plane bot = new Plane(a,b,c);
+        double he = cal.PointToPlane(e, bot);
+        A = a;
+        B = b;
+        C = c;
+        D = d;
+        this.h = he;
+        A1 = new Points(A.getX(),A.getY(),A.getZ()+he);
+        B1 = new Points(B.getX(),B.getY(),B.getZ()+he);
+        C1 = new Points(C.getX(),C.getY(),C.getZ()+he);
+        D1 = new Points(D.getX(),D.getY(),D.getZ()+he);
+        po.add(A); po.add(A1);
+        po.add(B); po.add(B1);
+        po.add(C); po.add(C1);
+        po.add(D); po.add(D1);
+        p1.add(A); p1.add(B); p1.add(C); p1.add(D); // ABCD
+        P1 = new Plane(A,B,C);
+        p2.add(A1); p2.add(B1); p2.add(C1); p2.add(D1); //A1B1C1D1
+        P2 = new Plane(A1,B1,C1);
+        p3.add(A); p3.add(A1); p3.add(B); p3.add(B1); //ABA1B1
+        P3 = new Plane(A,A1,B);
+        p4.add(A); p4.add(A1); p4.add(D); p4.add(D1); //ADA1D1
+        P4 = new Plane(A,A1,D);
+        p5.add(C); p5.add(C1); p5.add(B); p5.add(B1); //CBC1D1
+        P5 = new Plane(C,C1,B);
+        p6.add(C); p6.add(C1); p6.add(D); p6.add(D1); //CDC1D1
+        P6 = new Plane(C,C1,D);
+    }
     //ccheck where is object
     public boolean checkPosObj(double z){
         double a = A.getZ();
