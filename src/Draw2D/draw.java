@@ -105,11 +105,14 @@ public class draw extends Application{
         double y = Double.parseDouble(s1[1]);
         Rectangle re = new Rectangle(5*10,5*10,x*10,y*10);
         root.getChildren().add(re);
-        for(int i = 0;i<s2.length;i+=2){
-            Line line = new Line((Double.parseDouble(s2[i])+5)*10,(Double.parseDouble(s2[i+1])+5)*10,(Double.parseDouble(s2[i])+5)*10,(Double.parseDouble(s2[i+1])+5)*10);
-            line.setStroke(Color.WHITE);
-            root.getChildren().add(line);
+        if(s2.length != 1){
+            for(int i = 0;i<s2.length;i+=2){
+                Line line = new Line((Double.parseDouble(s2[i])+5)*10,(Double.parseDouble(s2[i+1])+5)*10,(Double.parseDouble(s2[i])+5)*10,(Double.parseDouble(s2[i+1])+5)*10);
+                line.setStroke(Color.WHITE);
+                root.getChildren().add(line);
+            }
         }
+        
         Line l1 = new Line(5*10,5*10,(5+x)*10,5*10);
         Line l2 = new Line((5+x)*10,5*10,(5+x)*10,(5+y)*10);
         Line l3 = new Line((5+x)*10,(5+y)*10,5*10,(5+y)*10);

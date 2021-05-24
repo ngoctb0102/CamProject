@@ -7,39 +7,66 @@ public class getDraw {
         //get top
         if(option == 0){
             ArrayList<Points> p = r.lTop();
-            for(int i = 0;i < p.size();i++){
-            s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getY()) + " ";
-            }   
+            if(p.size() != 0){
+                for(int i = 0;i < p.size();i++){
+                    s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getY()) + " ";
+                    }  
+            }else{
+                s[1] = "1";
+            }
         }else if(option == 1){
             //get bot
             ArrayList<Points> p = r.lBot();
-            for(int i = 0;i < p.size();i++){
-            s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getY()) + " ";
+            if(p.size() != 0){
+                for(int i = 0;i < p.size();i++){
+                    s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getY()) + " ";
+                    }
+            }else{
+                s[1] = "1";
             }
         }else if(option == 2){
             //get Left
             ArrayList<Points> p = r.lLeft();
-            for(int i = 0;i < p.size();i++){
-            s[1] = s[1] + Double.toString(p.get(i).getY()) + " " + Double.toString(p.get(i).getZ()) + " ";
+            if(p.size() != 0){
+                for(int i = 0;i < p.size();i++){
+                    s[1] = s[1] + Double.toString(p.get(i).getY()) + " " + Double.toString(p.get(i).getZ()) + " ";
+                    }
+            }else{
+                s[1] = "1";
             }
+            
         }else if(option == 3){
             //get right
             ArrayList<Points> p = r.lRight();
-            for(int i = 0;i < p.size();i++){
-            s[1] = s[1] + Double.toString(p.get(i).getY()) + " " + Double.toString(p.get(i).getZ()) + " ";
+            if(p.size() != 0){
+                for(int i = 0;i < p.size();i++){
+                    s[1] = s[1] + Double.toString(p.get(i).getY()) + " " + Double.toString(p.get(i).getZ()) + " ";
+                    }
+            }else{
+                s[1] = "1";
             }
         }else if(option == 4){
             //get behind
             ArrayList<Points> p = r.lBehind();
-            for(int i = 0;i < p.size();i++){
-            s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getZ()) + " ";
+            if(p.size() != 0){
+                for(int i = 0;i < p.size();i++){
+                    s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getZ()) + " ";
+                    }
+            }else{
+                s[1] = "1";
             }
+            
         }else if(option == 5){
             //get front
             ArrayList<Points> p = r.lFront();
-            for(int i = 0;i < p.size();i++){
-            s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getZ()) + " ";
+            if(p.size() != 0){
+                for(int i = 0;i < p.size();i++){
+                    s[1] = s[1] + Double.toString(p.get(i).getX()) + " " + Double.toString(p.get(i).getZ()) + " ";
+                    }
+            }else{
+                s[1] = "1";
             }
+            
         }
         this.s = s;
     }

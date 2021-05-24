@@ -21,7 +21,7 @@ public class App {
         //System.out.println(r.IsLight(new Points(18,0,0)));
         //System.out.println(r.perLighter() + "%");
         //System.out.println(r.lBot().size());
-        getDraw g = new getDraw(r,3);
+        getDraw g = new getDraw(r,4);
         g.show();
     }
 }
