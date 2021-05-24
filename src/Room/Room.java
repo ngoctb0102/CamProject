@@ -10,6 +10,24 @@ public class Room {
     private double l;
     private double w;
     private double h;
+    public double getL() {
+        return l;
+    }
+    public void setL(double l) {
+        this.l = l;
+    }
+    public double getW() {
+        return w;
+    }
+    public void setW(double w) {
+        this.w = w;
+    }
+    public double getH() {
+        return h;
+    }
+    public void setH(double h) {
+        this.h = h;
+    }
     //list of camera
     private ArrayList<Camera> Cams = new ArrayList<Camera>();
     public ArrayList<Camera> getCams() {
@@ -27,10 +45,10 @@ public class Room {
     private Plane Front; //y = l
     private Plane Top;//z = h 
     //get number of light point :>
-    private ArrayList<Points> lLeft = new ArrayList<Points>();
-    private ArrayList<Points> lRight = new ArrayList<Points>();
-    private ArrayList<Points> lBehind = new ArrayList<Points>();
-    private ArrayList<Points> lFront = new ArrayList<Points>();
+    // private ArrayList<Points> lLeft = new ArrayList<Points>();
+    // private ArrayList<Points> lRight = new ArrayList<Points>();
+    // private ArrayList<Points> lBehind = new ArrayList<Points>();
+    // private ArrayList<Points> lFront = new ArrayList<Points>();
     public Room(double l, double w, double h) {
         this.l = l;
         this.w = w;
@@ -420,7 +438,7 @@ public class Room {
                     for(int i = 0;i < cam.size();i++){
                         if(Objs.size() > 0){
                             for(int j = 0;j < Objs.size();j++){
-                                if(!Objs.get(i).checkTwoPo(a, cam.get(i))){
+                                if(!Objs.get(j).checkTwoPo(a, cam.get(i))){
                                     return true;
                                 }
                             }
@@ -479,7 +497,7 @@ public class Room {
         ArrayList<Points> lBot = new ArrayList<Points>();
         for(int i = 0;i < 500;i++ ){
             for(int j = 0; j < 500;j++){
-                Points a = new Points(w*(double)i/1000,l*(double)j/1000,0);
+                Points a = new Points(w*(double)i/500,l*(double)j/500,0);
                 if(IsLight(a)){
                     lBot.add(a);
                 }
@@ -490,9 +508,9 @@ public class Room {
     //function get lighted right x = w
     public ArrayList<Points> lRight(){
         ArrayList<Points> lRight = new ArrayList<Points>();
-        for(int i = 0;i < 1000;i++ ){
-            for(int j = 0; j < 1000;j++){
-                Points a = new Points(w,l*(double)i/1000,h*(double)j/1000);
+        for(int i = 0;i < 500;i++ ){
+            for(int j = 0; j < 500;j++){
+                Points a = new Points(w,l*(double)i/500,h*(double)j/500);
                 if(IsLight(a)){
                     lRight.add(a);
                 }
@@ -503,9 +521,9 @@ public class Room {
     //f get left x = 0
     public ArrayList<Points> lLeft(){
         ArrayList<Points> lLeft = new ArrayList<Points>();
-        for(int i = 0;i < 1000;i++ ){
-            for(int j = 0; j < 1000;j++){
-                Points a = new Points(0,l*(double)i/1000,h*(double)j/1000);
+        for(int i = 0;i < 500;i++ ){
+            for(int j = 0; j < 500;j++){
+                Points a = new Points(0,l*(double)i/500,h*(double)j/500);
                 if(IsLight(a)){
                     lLeft.add(a);
                 }
@@ -516,9 +534,9 @@ public class Room {
     //f get behind y = 0
     public ArrayList<Points> lBehind(){
         ArrayList<Points> lBehind = new ArrayList<Points>();
-        for(int i = 0;i < 1000;i++ ){
-            for(int j = 0; j < 1000;j++){
-                Points a = new Points(w*(double)i/1000,0,h*(double)j/1000);
+        for(int i = 0;i < 500;i++ ){
+            for(int j = 0; j < 500;j++){
+                Points a = new Points(w*(double)i/500,0,h*(double)j/500);
                 if(IsLight(a)){
                     lBehind.add(a);
                 }
@@ -529,9 +547,9 @@ public class Room {
     //f get front y = l
     public ArrayList<Points> lFront(){
         ArrayList<Points> lFront = new ArrayList<Points>();
-        for(int i = 0;i < 1000;i++ ){
-            for(int j = 0; j < 1000;j++){
-                Points a = new Points(w*(double)i/1000,l,h*(double)j/1000);
+        for(int i = 0;i < 500;i++ ){
+            for(int j = 0; j < 500;j++){
+                Points a = new Points(w*(double)i/500,l,h*(double)j/1000);
                 if(IsLight(a)){
                     lFront.add(a);
                 }
@@ -539,6 +557,18 @@ public class Room {
         }
         return lFront;
     }
-
+    //f get top z = h
+    public ArrayList<Points> lTop(){
+        ArrayList<Points> lTop = new ArrayList<Points>();
+        for(int i = 0;i < 500;i++ ){
+            for(int j = 0; j < 500;j++){
+                Points a = new Points(w*(double)i/500,l*(double)j/500,h);
+                if(IsLight(a)){
+                    lTop.add(a);
+                }
+            }
+        }
+        return lTop;
+    }
 }
 

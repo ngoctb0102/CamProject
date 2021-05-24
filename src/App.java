@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 public class App {
     public static void main(String[] args) throws Exception {
         Room r = new Room(20.0,20.0,20.0);
-        Camera c = new Camera(20,20,20,90,90,10.0);
+        Camera c = new Camera(13,0,20,60,60);
         r.addCam(c);
-        Camera c1 = new Camera(18,0,20,90,90,50);
+        Camera c1 = new Camera(7,0,20,60,60);
         r.addCam(c1);
         Points A = new Points(5,5,0);
         Points B = new Points(5,10,0);
@@ -17,8 +18,10 @@ public class App {
         Points D1 = new Points(1,3,0);
         Object o1 = new Object(A1,B1,C1,D1,8);
         r.addObj(o1);
-        System.out.println(r.IsLight(new Points(18,0,0)));
+        //System.out.println(r.IsLight(new Points(18,0,0)));
         //System.out.println(r.perLighter() + "%");
-        System.out.println(r.lBot().size());
+        //System.out.println(r.lBot().size());
+        getDraw g = new getDraw(r,3);
+        g.show();
     }
 }
