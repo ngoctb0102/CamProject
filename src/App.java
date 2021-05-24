@@ -2,9 +2,9 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) throws Exception {
         Room r = new Room(20.0,20.0,20.0);
-        Camera c = new Camera(13,0,20,60,60);
+        Camera c = new Camera(13,0,18,60,60);
         r.addCam(c);
-        Camera c1 = new Camera(7,0,20,60,60);
+        Camera c1 = new Camera(7,0,15,60,60);
         r.addCam(c1);
         Points A = new Points(5,5,0);
         Points B = new Points(5,10,0);
@@ -21,7 +21,7 @@ public class App {
         //System.out.println(r.IsLight(new Points(18,0,0)));
         //System.out.println(r.perLighter() + "%");
         //System.out.println(r.lBot().size());
-        getDraw g = new getDraw(r,4);
+        getDraw g = new getDraw(r,0);
         g.show();
     }
 }

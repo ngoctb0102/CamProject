@@ -85,7 +85,7 @@ public class Room {
     }
     //add camera to Room
     public void addCam(Camera c){
-        if(cal.IsInPlane(c,Top)){
+        if(CheckCam(c) != 0){
             if(checkInR(c)){
                 Cams.add(c);
                 System.out.println("Added Camera");
@@ -103,7 +103,31 @@ public class Room {
     //check where the camera is ?
     public int CheckCam(Camera c){
         if(!cal.IsInPlane(c,Top)){
-            return 0; //if camera is not in top return 0
+            if(cal.IsInPlane(c,Left)){
+                if(cal.IsInPlane(c,Behind)){
+                    return 11; //if in left and behind
+                }else if(cal.IsInPlane(c,Front)){
+                    return 13; //if in left and front
+                }else{
+                    return 12;//if only in left
+                }
+            }else if(cal.IsInPlane(c,Front)){
+                if(cal.IsInPlane(c,Right)){
+                    return 15;//if in front and right
+                }else{
+                    return 14;//if only in front
+                }
+            }else if(cal.IsInPlane(c,Right)){
+                if(cal.IsInPlane(c, Behind)){
+                    return 17;//if in right anf behind
+                }else{
+                    return 16;//only in right
+                }
+            }else if(cal.IsInPlane(c,Behind)){
+                return 18;//only in behind
+            }else{
+                return 0;//error position
+            } //if camera is not in top return 0
         }else{
             if(cal.IsInPlane(c,Left)){
                 if(cal.IsInPlane(c,Behind)){
@@ -331,6 +355,161 @@ public class Room {
             Points mT = cal.GetIntPoint(cT,P);
             //mid bot insect
             Points mB = new Points(2*H.getX() - mT.getX(),2*H.getY() - mT.getY(),2*H.getZ() - mT.getZ());
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
+            //get top apex
+            Points T1 = new Points(mT.getX()+d,mT.getY()+d,mT.getZ());
+            Points T2 = new Points(mT.getX()-d,mT.getY()-d,mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX()+d,mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }if(CheckCam(c) == 12){
+            //get center of camera
+            Points H = new Points(c.getLenght(),c.getY(),c.getZ());
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle());
+            //get top apex
+            Points T1 = new Points(mT.getX(),mT.getY()+d,mT.getZ());
+            Points T2 = new Points(mT.getX(),mT.getY()-d,mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX(),mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 14){
+            Points H = new Points(c.getX(),l - c.getLenght(),c.getZ());
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            //mid top insect
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle());
+            //get top apex
+            Points T1 = new Points(mT.getX()+d,mT.getY(),mT.getZ());
+            Points T2 = new Points(mT.getX()-d,mT.getY(),mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX()+d,mB.getY(),mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 16){
+            Points H = new Points(w-c.getX(),c.getY(),c.getZ());
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            //mid top insect
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle());
+            //get top apex
+            Points T1 = new Points(mT.getX(),mT.getY()+d,mT.getZ());
+            Points T2 = new Points(mT.getX(),mT.getY()-d,mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX(),mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 18){
+            Points H = new Points(c.getX(),c.getLenght(),c.getZ());
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            //mid top insect
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle());
+            //get top apex
+            Points T1 = new Points(mT.getX()+d,mT.getY(),mT.getZ());
+            Points T2 = new Points(mT.getX()-d,mT.getY(),mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX()+d,mB.getY(),mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 11){ //in angle
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            double dxy = c.getLenght()/Math.sqrt(2.0);
+            Points H = new Points(c.getX() + dxy,c.getY() + dxy,c.getZ());
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
+            //get top apex
+            Points T1 = new Points(mT.getX()+d,mT.getY()-d,mT.getZ());
+            Points T2 = new Points(mT.getX()-d,mT.getY()+d,mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX()+d,mB.getY()-d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 13){
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            double dxy = c.getLenght()/Math.sqrt(2.0);
+            Points H = new Points(c.getX() + dxy,c.getY() - dxy,c.getZ());
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
+            //get top apex
+            Points T1 = new Points(mT.getX()+d,mT.getY()+d,mT.getZ());
+            Points T2 = new Points(mT.getX()-d,mT.getY()-d,mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX()+d,mB.getY()+d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 15){
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            double dxy = c.getLenght()/Math.sqrt(2.0);
+            Points H = new Points(c.getX() - dxy,c.getY() - dxy,c.getZ());
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
+            //mB.print();
+            //distance from mid too apex
+            double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
+            //mB.print();
+            //System.out.println("d = " + d);
+            //get top apex
+            Points T1 = new Points(mT.getX()+d,mT.getY()-d,mT.getZ());
+            Points T2 = new Points(mT.getX()-d,mT.getY()+d,mT.getZ());
+            c.t1 = T1;
+            c.t2 = T2;
+            //get bbot apex
+            Points B1 = new Points(mB.getX()+d,mB.getY()-d,mB.getZ());
+            Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
+            c.b1 = B1;
+            c.b2 = B2;
+        }else if(CheckCam(c) == 17){
+            double dz = c.getLenght()*Math.tan(c.gethAngle());
+            double dxy = c.getLenght()/Math.sqrt(2.0);
+            Points H = new Points(c.getX() - dxy,c.getY() + dxy,c.getZ());
+            Points mT = new Points(H.getX(),H.getY(),H.getZ()+dz);
+            //mid bot insect
+            Points mB = new Points(H.getX(),H.getY(),H.getZ()-dz);
             //distance from mid too apex
             double d = c.getLenght()*Math.tan(c.getlAngle())/Math.sqrt(2.0);
             //get top apex
