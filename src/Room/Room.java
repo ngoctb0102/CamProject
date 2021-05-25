@@ -536,29 +536,36 @@ public class Room {
     public boolean checkObj(Object o){
         for(int i = 0;i<o.getPo().size();i++){
             if(!checkInR(o.getPo().get(i))){
+                // System.out.println("not in room");
                 return false; //object is not in room
             }
         }
         if(Objs.size() > 0){
             for(int i = 0;i < Objs.size();i++){
                 if(Objs.get(i).checkInputObj(o) == 0){
+                    // System.out.println("in other ob");
                     return false;
                 }
             }
             for(int i = 0;i < Objs.size();i++){
                 if(Objs.get(i).checkInputObj(o) == -1){
+                    // System.out.println("on other");
                     return true;
                 }
             }
-            if(o.checkPosObj(0.0) || o.checkPosObj(h)){
+            if(o.checkPosObj(0.0)){
+                // System.out.println("not on but in other");
                 return true;
             }else{
+                // System.out.println("not on but in other 1");
                 return false;
             }
         }else{
-            if(o.checkPosObj(0.0) || o.checkPosObj(h)){
+            if(o.checkPosObj(0.0)){
+                // System.out.println("normal");
                 return true;
             }else{
+                // System.out.println("is fly");
                 return false;
             }
         }

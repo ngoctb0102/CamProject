@@ -2,7 +2,7 @@ import java.util.ArrayList;
 public class getDraw {
     String[] s;
     public getDraw(Room r, int option){
-        String []s = {"",""};
+        String []s = {"","","",""};
         s[0] = s[0] + Double.toString(r.getW()) + " " + Double.toString(r.getL());
         //get top
         if(option == 0){
@@ -14,6 +14,8 @@ public class getDraw {
             }else{
                 s[1] = "1";
             }
+            s[2] = "x y";
+            s[3] = "Mặt trần nhà";
         }else if(option == 1){
             //get bot
             ArrayList<Points> p = r.lBot();
@@ -24,6 +26,8 @@ public class getDraw {
             }else{
                 s[1] = "1";
             }
+            s[2] = "x y";
+            s[3] = "Mặt sàn nhà";
         }else if(option == 2){
             //get Left
             ArrayList<Points> p = r.lLeft();
@@ -34,7 +38,8 @@ public class getDraw {
             }else{
                 s[1] = "1";
             }
-            
+            s[2] = "y z";
+            s[3] = "Mặt bên trái";
         }else if(option == 3){
             //get right
             ArrayList<Points> p = r.lRight();
@@ -45,6 +50,8 @@ public class getDraw {
             }else{
                 s[1] = "1";
             }
+            s[2] = "y z";
+            s[3] = "Mặt bên phải";
         }else if(option == 4){
             //get behind
             ArrayList<Points> p = r.lBehind();
@@ -55,7 +62,8 @@ public class getDraw {
             }else{
                 s[1] = "1";
             }
-            
+            s[2] = "x z";
+            s[3] = "Mặt đằng sau";
         }else if(option == 5){
             //get front
             ArrayList<Points> p = r.lFront();
@@ -66,7 +74,8 @@ public class getDraw {
             }else{
                 s[1] = "1";
             }
-            
+            s[2] = "x z";
+            s[3] = "Mặt đăng trước";
         }
         this.s = s;
     }

@@ -151,25 +151,30 @@ public class Object {
     public boolean checkObInOb(Object o){
         for(int i = 0;i < o.getPo().size();i++){
             if(checkInObj(o.getPo().get(i))){
-                return false;
+                System.out.println("in other");
+                return true;
             }
         }
         for(int i = 0;i<po.size();i++){
             if(o.checkInObj(po.get(i))){
-                return false;
+                System.out.println("in other");
+                return true;
             }
         }
-        return true;
+        return false;
     }
     //check if object o on object ?
     public int checkInputObj(Object o){
         if(!checkObInOb(o)){
+            // System.out.println("in other 1");
             return 1;//outsize
         }else{
             Plane P = new Plane(A1,B1,C1);
             if(cal.IsInPlane(o.A, P)){
+                // System.out.println("in other - 1");
                 return -1; //on
             }else{
+                // System.out.println("in other 0");
                 return 0; //in
             }
         }

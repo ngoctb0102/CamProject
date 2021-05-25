@@ -8,10 +8,13 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javafx.scene.text.Text;
 
 public class draw extends Application{
     String[] s1;
     String[] s2;
+    String[] s3;
+    String s4;
     // Room r;
     // ArrayList<Points> p = new ArrayList<Points>();
     // //to build a draw !!
@@ -93,6 +96,8 @@ public class draw extends Application{
     public void init() throws Exception{
         this.s1 = getParameters().getRaw().get(0).split("\\s");
         this.s2 = getParameters().getRaw().get(1).split("\\s");
+        this.s3 = getParameters().getRaw().get(2).split("\\s");
+        this.s4 = getParameters().getRaw().get(3);
     }
     public void start(Stage draw) throws Exception{
         //super.init();
@@ -121,8 +126,33 @@ public class draw extends Application{
         root.getChildren().add(l2);
         root.getChildren().add(l3);
         root.getChildren().add(l4);
-        
-        
+        Text t1 = new Text();
+        t1.setText(s3[0]);
+        t1.setX(50);
+        t1.setY(15);
+        Line ox = new Line(5,5,50,5);
+        root.getChildren().add(ox);
+        Line o1 = new Line(50,5,45,3);
+        root.getChildren().add(o1);
+        Line o2 = new Line(50,5,45,7);
+        root.getChildren().add(o2);
+        Text t2 = new Text();
+        t2.setText(s3[1]);
+        t2.setX(10);
+        t2.setY(50);
+        Line oy = new Line(5,5,5,50);
+        Line o3 = new Line(5,50,3,45);
+        Line o4 = new Line(5,50,7,45);
+        root.getChildren().add(o3);
+        root.getChildren().add(o4);
+        root.getChildren().add(oy);
+        root.getChildren().add(t1);
+        root.getChildren().add(t2);
+        Text title = new Text();
+        title.setText(s4);
+        title.setX(20 + 5*x);
+        title.setY(20);
+        root.getChildren().add(title);
         
         Scene scene = new Scene(root, 100 + 10*x, 100 + 10*x);
         
