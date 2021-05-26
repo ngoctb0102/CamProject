@@ -38,6 +38,12 @@ public class Room {
     }
     //list of object
     private ArrayList<Object> Objs = new ArrayList<Object>();
+    public ArrayList<Object> getObjs() {
+        return Objs;
+    }
+    public void setObjs(ArrayList<Object> objs) {
+        Objs = objs;
+    }
     private Plane Bot; //z = 0
     private Plane Left; //x = 0
     private Plane Right; //x = w 
@@ -87,9 +93,11 @@ public class Room {
     public void addCam(Camera c){
         if(CheckCam(c) != 0){
             if(checkInR(c)){
-                Cams.add(c);
-                System.out.println("Added Camera");
-                CamVision(c);
+                if(c.isInList(Cams)){
+                    Cams.add(c);
+                    //System.out.println("Added Camera");
+                    CamVision(c);
+                }
             }
         }
     }
@@ -159,7 +167,8 @@ public class Room {
     //get cam vision in room
     private void CamVision(Camera c){
         //in left x = 0
-        if(CheckCam(c) == 2){
+        int i = CheckCam(c);
+        if(i == 2){
             //get center of camera
             Points H = new Points(c.getLenght()*Math.cos(c.gethAngle()),c.getY(),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
@@ -184,7 +193,7 @@ public class Room {
             Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 4){
+        }else if(i == 4){
             Points H = new Points(c.getX(),l - c.getLenght()*Math.cos(c.gethAngle()),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
@@ -208,7 +217,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 6){
+        }else if(i == 6){
             Points H = new Points(w - c.getLenght()*Math.cos(c.gethAngle()),c.getY(),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
@@ -232,7 +241,7 @@ public class Room {
             Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 8){
+        }else if(i == 8){
             Points H = new Points(c.getX(),c.getLenght()*Math.cos(c.gethAngle()),h - c.getLenght()*Math.sin(c.gethAngle()));
             //top insection
             Points T = new Points(H.getX(),H.getY(),h);
@@ -256,7 +265,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 1){ //in angle
+        }else if(i == 1){ //in angle
             double dz = c.getLenght()*Math.sin(c.gethAngle());
             double dxy = c.getLenght()*Math.cos(c.gethAngle())/Math.sqrt(2.0);
             Points H = new Points(c.getX() + dxy,c.getY() + dxy,h - dz);
@@ -282,7 +291,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 3){
+        }else if(i == 3){
             double dz = c.getLenght()*Math.sin(c.gethAngle());
             double dxy = c.getLenght()*Math.cos(c.gethAngle())/Math.sqrt(2.0);
             Points H = new Points(c.getX() + dxy,c.getY() - dxy,h - dz);
@@ -308,7 +317,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 5){
+        }else if(i == 5){
             double dz = c.getLenght()*Math.sin(c.gethAngle());
             double dxy = c.getLenght()*Math.cos(c.gethAngle())/Math.sqrt(2.0);
             //System.out.println(dz + "  " + dxy);
@@ -341,7 +350,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 7){
+        }else if(i == 7){
             double dz = c.getLenght()*Math.sin(c.gethAngle());
             double dxy = c.getLenght()*Math.cos(c.getlAngle())/Math.sqrt(2.0);
             Points H = new Points(c.getX() - dxy,c.getY() + dxy,h - dz);
@@ -367,7 +376,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }if(CheckCam(c) == 12){
+        }if(i == 12){
             //get center of camera
             Points H = new Points(c.getLenght(),c.getY(),c.getZ());
             double dz = c.getLenght()*Math.tan(c.gethAngle());
@@ -386,7 +395,7 @@ public class Room {
             Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 14){
+        }else if(i == 14){
             Points H = new Points(c.getX(),l - c.getLenght(),c.getZ());
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             //mid top insect
@@ -405,7 +414,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 16){
+        }else if(i == 16){
             Points H = new Points(w-c.getX(),c.getY(),c.getZ());
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             //mid top insect
@@ -424,7 +433,7 @@ public class Room {
             Points B2 = new Points(mB.getX(),mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 18){
+        }else if(i == 18){
             Points H = new Points(c.getX(),c.getLenght(),c.getZ());
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             //mid top insect
@@ -443,7 +452,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY(),mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 11){ //in angle
+        }else if(i == 11){ //in angle
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             double dxy = c.getLenght()/Math.sqrt(2.0);
             Points H = new Points(c.getX() + dxy,c.getY() + dxy,c.getZ());
@@ -462,7 +471,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 13){
+        }else if(i == 13){
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             double dxy = c.getLenght()/Math.sqrt(2.0);
             Points H = new Points(c.getX() + dxy,c.getY() - dxy,c.getZ());
@@ -481,7 +490,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()-d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 15){
+        }else if(i == 15){
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             double dxy = c.getLenght()/Math.sqrt(2.0);
             Points H = new Points(c.getX() - dxy,c.getY() - dxy,c.getZ());
@@ -503,7 +512,7 @@ public class Room {
             Points B2 = new Points(mB.getX()-d,mB.getY()+d,mB.getZ());
             c.b1 = B1;
             c.b2 = B2;
-        }else if(CheckCam(c) == 17){
+        }else if(i == 17){
             double dz = c.getLenght()*Math.tan(c.gethAngle());
             double dxy = c.getLenght()/Math.sqrt(2.0);
             Points H = new Points(c.getX() - dxy,c.getY() + dxy,c.getZ());
@@ -526,56 +535,43 @@ public class Room {
     }
     //check if point in room
     public boolean checkInR(Points p){
-        if(0 <= p.getX() && p.getX() <= w && 0 <= p.getY() && p.getY() <= l && 0 <= p.getZ() && p.getZ() <= h){
-            return true;
-        }else{
-            return false;
-        }
+        return 0 <= p.getX() && p.getX() <= w && 0 <= p.getY() && p.getY() <= l && 0 <= p.getZ() && p.getZ() <= h;
     }
     //check add Object
     public boolean checkObj(Object o){
-        for(int i = 0;i<o.getPo().size();i++){
+        int a = o.getPo().size();
+        for(int i = 0;i<a;i++){
             if(!checkInR(o.getPo().get(i))){
                 // System.out.println("not in room");
                 return false; //object is not in room
             }
         }
-        if(Objs.size() > 0){
-            for(int i = 0;i < Objs.size();i++){
+        int b = Objs.size();
+        if(b > 0){
+            for(int i = 0;i <b ;i++){
                 if(Objs.get(i).checkInputObj(o) == 0){
                     // System.out.println("in other ob");
                     return false;
                 }
             }
-            for(int i = 0;i < Objs.size();i++){
+            for(int i = 0;i < b;i++){
                 if(Objs.get(i).checkInputObj(o) == -1){
                     // System.out.println("on other");
                     return true;
                 }
             }
-            if(o.checkPosObj(0.0)){
-                // System.out.println("not on but in other");
-                return true;
-            }else{
-                // System.out.println("not on but in other 1");
-                return false;
-            }
+            return o.checkPosObj(0.0);
         }else{
-            if(o.checkPosObj(0.0)){
-                // System.out.println("normal");
-                return true;
-            }else{
-                // System.out.println("is fly");
-                return false;
-            }
+            return o.checkPosObj(0.0);
         }
     }
     //check point in any obj ?
     public boolean checkInObj(Points a){
-        if(Objs.size() == 0){
+        int b = Objs.size();
+        if(b == 0){
             return false;
         }else{
-            for(int i = 0;i < Objs.size();i++){
+            for(int i = 0;i < b;i++){
                 if(Objs.get(i).checkInObj(a)){
                     return true;
                 }
@@ -585,10 +581,11 @@ public class Room {
     }
     //check point in any cam vision ?
     public boolean checkInCamV(Points a){
-        if(Cams.size() == 0){
+        int b = Cams.size();
+        if(b == 0){
             return false;
         }else{
-            for(int i = 0;i<Cams.size();i++){
+            for(int i = 0;i<b;i++){
                 if(Cams.get(i).checkInCam(a)){
                     return true;
                 }
@@ -599,7 +596,8 @@ public class Room {
     //get every cam in CamVision
     public ArrayList<Camera> getCamSeeP(Points a){
         ArrayList<Camera> cam = new ArrayList<Camera>();
-        for(int i = 0;i<Cams.size();i++){
+        int b = Cams.size();
+        for(int i = 0;i<b;i++){
             if(Cams.get(i).checkInCam(a)){
                 cam.add(Cams.get(i));
             }
@@ -621,13 +619,18 @@ public class Room {
                     return false;
                 }else{
                     ArrayList<Camera> cam = getCamSeeP(a);
-                    for(int i = 0;i < cam.size();i++){
-                        if(Objs.size() > 0){
-                            for(int j = 0;j < Objs.size();j++){
+                    int b = cam.size();
+                    int c = Objs.size();
+                    for(int i = 0;i < b;i++){
+                        if(c > 0){
+                            int count = 0;
+                            for(int j = 0;j < c;j++){
                                 if(!Objs.get(j).checkTwoPo(a, cam.get(i))){
-                                    return true;
+                                    count = count + 1;
                                 }
-                            }
+                            }if(count == c){
+                                return true;
+                            }   
                         }else{
                             return true;
                         }
@@ -639,18 +642,19 @@ public class Room {
     }
     //function get set of lighted points
     public double getVolLighted(){
-        ArrayList<Points> lPoints = new ArrayList<Points>();
+        // ArrayList<Points> lPoints = new ArrayList<Points>();
+        double vol = 0;
         for(int i = 0;i<100;i++){
             for(int j = 0;j<100;j++){
                 for(int k = 0;k<100;k++){
                     Points T = new Points(w*(double)k/100,l*(double)j/100,h*(double)i/100);
                     if(IsLight(T)){
-                        lPoints.add(T);
+                        vol = vol + 1;
                     }
                 }
             }
         }
-        return lPoints.size();
+        return vol;
     }
     //function get lighted are percentage
     public double perLighter(){
@@ -659,18 +663,19 @@ public class Room {
     }
     //function get point is in Object
     public double getInObj(){
-        ArrayList<Points> inObj = new ArrayList<Points>();
+        // ArrayList<Points> inObj = new ArrayList<Points>();
+        double count = 0;
         for(int i = 0;i<100;i++){
             for(int j = 0;j<100;j++){
                 for(int k = 0;k<100;k++){
                     Points T = new Points(w*(double)k/100,l*(double)j/100,h*(double)i/100);
                     if(checkInObj(T)){
-                        inObj.add(T);
+                        count = count + 1;
                     }
                 }
             }
         }
-        return inObj.size();
+        return count;
     }
     //function get percentage lighted with object dark
     public double perLight(){

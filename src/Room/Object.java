@@ -64,10 +64,27 @@ public class Object {
         this.h = h;
     }
     public Object(Points a, Points b, Points c, Points d, double h) {
-        A = a;
-        B = b;
-        C = c;
-        D = d;
+        Vector ab =  new Vector(a,b);
+        Vector ac = new Vector(a,c);
+        Vector ad =  new Vector(a,d);
+        if(cal.ScalarVec(ab, ac) == 0){
+            A = a;
+            B = b;
+            C = d;
+            D = c;
+        }else if(cal.ScalarVec(ab,ad) == 0){
+            A = a;
+            B = b;
+            C = c;
+            D = d;
+        }else if(cal.ScalarVec(ac,ad) == 0){
+            A = a;
+            B = c;
+            C = b;
+            D = d;
+        }else{
+            throw new  IllegalArgumentException("invalid input object");
+        }
         this.h = h;
         A1 = new Points(A.getX(),A.getY(),A.getZ()+h);
         B1 = new Points(B.getX(),B.getY(),B.getZ()+h);
@@ -93,10 +110,28 @@ public class Object {
     public Object(Points a, Points b, Points c, Points d, Points e, Points f, Points g, Points h){
         Plane bot = new Plane(a,b,c);
         double he = cal.PointToPlane(e, bot);
-        A = a;
-        B = b;
-        C = c;
-        D = d;
+        Vector ab =  new Vector(a,b);
+        Vector ac = new Vector(a,c);
+        Vector ad =  new Vector(a,d);
+        if(cal.ScalarVec(ab, ac) == 0){
+            A = a;
+            B = b;
+            C = d;
+            D = c;
+        }else if(cal.ScalarVec(ab,ad) == 0){
+            A = a;
+            B = b;
+            C = c;
+            D = d;
+        }else if(cal.ScalarVec(ac,ad) == 0){
+            A = a;
+            B = c;
+            C = b;
+            D = d;
+        }else{
+            throw new  IllegalArgumentException("invalid input object");
+        }
+        
         this.h = he;
         A1 = new Points(A.getX(),A.getY(),A.getZ()+he);
         B1 = new Points(B.getX(),B.getY(),B.getZ()+he);
@@ -125,11 +160,7 @@ public class Object {
         double b = B.getZ();
         double c = C.getZ();
         double d = D.getZ();
-        if(a == z && b == z && c == z && d == z){
-            return true;
-        }else{
-            return false;
-        }
+        return a == z && b == z && c == z && d == z;
     }
     //check if point in object
     public boolean checkInObj(Points m){
@@ -140,7 +171,15 @@ public class Object {
         double v4 = cal.GetVolPyr(p4, m);
         double v5 = cal.GetVolPyr(p5, m);
         double v6 = cal.GetVolPyr(p6, m);
+        // System.out.println(v);
+        // System.out.println(v1);
+        // System.out.println(v2);
+        // System.out.println(v3);
+        // System.out.println(v4);
+        // System.out.println(v5);
+        // System.out.println(v6);
         double vM = v1 + v2 + v3 + v4 + v5 + v6;
+        // System.out.println(vM);
         if((double) Math.round(v*1000)/1000 == (double) Math.round(vM*1000)/1000){
             return true;
         }else{
@@ -181,12 +220,8 @@ public class Object {
     }
     //check if point in objplane
     public boolean checkOnObjPlane(Points a){
-        if(cal.GetVolPyr(p4, a) == 0.0 || cal.GetVolPyr(p1, a) == 0.0 || cal.GetVolPyr(p2,a) == 0.0 || 
-        cal.GetVolPyr(p3, a) == 0.0 || cal.GetVolPyr(p5,a) == 0.0 || cal.GetVolPyr(p6, a) == 0.0){
-            return true;
-        }else{
-            return false;
-        }
+        return cal.GetVolPyr(p4, a) == 0.0 || cal.GetVolPyr(p1, a) == 0.0 || cal.GetVolPyr(p2,a) == 0.0 || 
+        cal.GetVolPyr(p3, a) == 0.0 || cal.GetVolPyr(p5,a) == 0.0 || cal.GetVolPyr(p6, a) == 0.0;
     }
     //check if two points is hidden by object
     public boolean checkTwoPo(Points a, Points b){

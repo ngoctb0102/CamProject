@@ -69,10 +69,21 @@ public class Camera extends Points{
         double v5 = cal.GetVolPyr(p, a);
         double vS = v1 + v2 + v3 + v4 + v5;
         // System.out.println(v1 + " " + v2 + " " + v3 + " " + v4 + " "+v5+" "+ vS);
-        if((double) Math.round(v*1000)/1000 == (double) Math.round(vS*1000)/1000){
+        return (double) Math.round(v*1000)/1000 == (double) Math.round(vS*1000)/1000;
+    }
+    public boolean checkIsOne(Camera c){
+        return c.getX() == getX() && c.getY() == getY() && c.getZ() == getZ();
+    }
+    public boolean isInList(ArrayList<Camera> cam){
+        if(cam.size() == 0){
             return true;
         }else{
-            return false;
+            for(int i = 0;i < cam.size();i++){
+                if(checkIsOne(cam.get(i))){
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

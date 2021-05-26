@@ -17,19 +17,11 @@ public class Cal {    //Calculate class
         double t = (A.getX() - d.getXo())/d.getA();
         double y = d.getB()*t + d.getYo();
         double z = d.getC()*t + d.getZo();
-        if(y == A.getY() && z == A.getZ()){ //if has t x = xo+at,y=yo+bt,z=zo+ct
-            return true;
-        }else{
-            return false;
-        }
+        return y == A.getY() && z == A.getZ();
     }
     //check points in plane
     public boolean IsInPlane(Points A,Plane P){
-        if(PointToPlane(A,P) == 0.0){
-            return true;
-        }else{
-            return false;
-        }
+        return PointToPlane(A,P) == 0.0;
     }
     //x = b1c2 - b2c1, y = c1a2 - c2a1, z = a1b2 - a2b1
     public Vector DirectedVec(Vector v1, Vector v2){ 
