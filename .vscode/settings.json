@@ -5,6 +5,7 @@
         "src/Room",
         "src/Draw2D",
         "src/Camera",
+        "src/File",
         "main",
         "src",
         "src/App.java"

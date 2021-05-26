@@ -55,7 +55,7 @@ public class Room {
     // private ArrayList<Points> lRight = new ArrayList<Points>();
     // private ArrayList<Points> lBehind = new ArrayList<Points>();
     // private ArrayList<Points> lFront = new ArrayList<Points>();
-    public Room(double l, double w, double h) {
+    public Room(double w, double l, double h) {
         this.l = l;
         this.w = w;
         this.h = h;
@@ -95,7 +95,7 @@ public class Room {
             if(checkInR(c)){
                 if(c.isInList(Cams)){
                     Cams.add(c);
-                    //System.out.println("Added Camera");
+                    System.out.println("Added Camera");
                     CamVision(c);
                 }
             }
@@ -542,7 +542,8 @@ public class Room {
         int a = o.getPo().size();
         for(int i = 0;i<a;i++){
             if(!checkInR(o.getPo().get(i))){
-                // System.out.println("not in room");
+                o.getPo().get(i).print();
+                //System.out.println("not in room");
                 return false; //object is not in room
             }
         }
@@ -562,6 +563,7 @@ public class Room {
             }
             return o.checkPosObj(0.0);
         }else{
+            //System.out.println(o.checkPosObj(0.0));
             return o.checkPosObj(0.0);
         }
     }

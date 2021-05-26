@@ -41,7 +41,8 @@ public class TestInput {
         // read file
         int count = 0;
     	String [] lines = new String[100];
-    	FileInputStream fileInputStream = new FileInputStream("input.txt");
+        String path = "src/File/input.txt";
+    	FileInputStream fileInputStream = new FileInputStream(path);
         Scanner scanner = new Scanner(fileInputStream);
     	try {
     		while (scanner.hasNextLine()) {
@@ -102,10 +103,10 @@ public class TestInput {
         }
         ArrayList<Object> arrObject = new ArrayList<Object>();
         for(int i = 0; i < arr_pointObj.size(); i = i + 8){
-        Object obj = new Object(arr_pointObj.get(i),arr_pointObj.get(i+1),arr_pointObj.get(i+2),arr_pointObj.get(i+3),arr_pointObj.get(i+4),arr_pointObj.get(i+5),arr_pointObj.get(i+6),arr_pointObj.get(i+7));
-        arrObject.add(obj);
+        r.addObj(new Object(arr_pointObj.get(i),arr_pointObj.get(i+1),arr_pointObj.get(i+2),arr_pointObj.get(i+3),arr_pointObj.get(i+4),arr_pointObj.get(i+5),arr_pointObj.get(i+6),arr_pointObj.get(i+7)));
+        //arrObject.add(obj);
         }
-            
+        
         
         // tach toa do camera
         ArrayList<Double> numsCam = new ArrayList<Double>(); // mang toa do camera
@@ -123,13 +124,16 @@ public class TestInput {
         // Khoi tao camera
         ArrayList<Camera> arrCamera = new ArrayList<Camera>();
         for(int i = 0; i < numsCam.size(); i = i + 5){
-            Camera cam = new Camera(numsCam.get(i), numsCam.get(i+1), numsCam.get(i+2), numsCam.get(i+3), numsCam.get(i+4));
-            arrCamera.add(cam);
+            r.addCam( new Camera(numsCam.get(i), numsCam.get(i+1), numsCam.get(i+2), numsCam.get(i+3), numsCam.get(i+4)));
+            //arrCamera.add(cam);
         }
 
         //System.out.println(nums);
         //System.out.println(arr_pointRoom);
         //System.out.println(numsObj);
         //System.out.println(numsCam);
+        // System.out.println(r.getCams().size());
+        getDraw g = new getDraw(r,0);
+        g.show();
     }
 }

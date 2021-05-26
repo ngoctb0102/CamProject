@@ -39,4 +39,12 @@ public class Points{
     public void print(){
         System.out.println(x + " " + y + " " + z); 
     }
+    // public Points(String s){
+    //     System.out.println(s);
+    //     String[] a = s.replace(")", "").replace("(", "").split(",");
+        
+    //     this.x = Double.parseDouble(a[0]);
+    //     this.y = Double.parseDouble(a[1]);
+    //     this.z = Double.parseDouble(a[2]);
+    // }
 }

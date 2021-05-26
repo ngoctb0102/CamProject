@@ -43,6 +43,19 @@ public class Camera extends Points{
         lAngle = Math.toRadians(langle/2);
         Lenght = 1000;
     }
+    // public Camera(String s){
+    //     String[] a = s.split(" ");
+    //     String[] arg = a[0].replace(")", "").replace("(", "").split(",");
+    //     double x = Double.parseDouble(arg[0]);
+    //     double y = Double.parseDouble(arg[1]);
+    //     double z = Double.parseDouble(arg[2]);
+    //     this.x = x;
+    //     this.y = y;
+    //     this.z = z;
+    //     hAngle = Math.toRadians(Double.parseDouble(a[1]));
+    //     lAngle = Math.toRadians(Double.parseDouble(a[2]));
+    //     Lenght = 1000;
+    // }
     public boolean checkInCam(Points a){
         Points S = new Points(this.x,this.y,this.z);
         //S.print();
