@@ -97,8 +97,14 @@ public class Room {
                     Cams.add(c);
                     System.out.println("Added Camera");
                     CamVision(c);
+                }else{
+                    System.out.println("This place is have a camera");
                 }
+            }else{
+                System.out.println("Camera is not in room");
             }
+        }else{
+            System.out.println("Camera can't be set here");
         }
     }
     //add Obj to Room
@@ -106,6 +112,8 @@ public class Room {
         if(checkObj(o)){
             System.out.println("Added Obj");
             Objs.add(o);
+        }else{
+            System.out.println("Object is not correct");
         }
     }
     //check where the camera is ?
