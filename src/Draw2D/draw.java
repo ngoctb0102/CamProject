@@ -108,20 +108,27 @@ public class draw extends Application{
         //x = getParameters().get
         double x = Double.parseDouble(s1[0]);
         double y = Double.parseDouble(s1[1]);
-        Rectangle re = new Rectangle(5*10,5*10,x*10,y*10);
+        //mutil percentage
+        double z = 10;
+        double t = 5;
+        if(x < 10 || y < 10){
+            z = 100;
+            t = 0.5;
+        }
+        Rectangle re = new Rectangle(t*z,t*z,x*z,y*z);
         root.getChildren().add(re);
         if(s2.length != 1){
             for(int i = 0;i<s2.length;i+=2){
-                Line line = new Line((Double.parseDouble(s2[i])+5)*10,(Double.parseDouble(s2[i+1])+5)*10,(Double.parseDouble(s2[i])+5)*10,(Double.parseDouble(s2[i+1])+5)*10);
+                Line line = new Line((Double.parseDouble(s2[i])+t)*z,(Double.parseDouble(s2[i+1])+t)*z,(Double.parseDouble(s2[i])+t)*z,(Double.parseDouble(s2[i+1])+t)*z);
                 line.setStroke(Color.WHITE);
                 root.getChildren().add(line);
             }
         }
         
-        Line l1 = new Line(5*10,5*10,(5+x)*10,5*10);
-        Line l2 = new Line((5+x)*10,5*10,(5+x)*10,(5+y)*10);
-        Line l3 = new Line((5+x)*10,(5+y)*10,5*10,(5+y)*10);
-        Line l4 = new Line(5*10,(5+y)*10,5*10,5*10);
+        Line l1 = new Line(t*z,t*z,(t+x)*z,t*z);
+        Line l2 = new Line((t+x)*z,t*z,(t+x)*z,(t+y)*z);
+        Line l3 = new Line((t+x)*z,(t+y)*z,t*z,(t+y)*z);
+        Line l4 = new Line(t*z,(t+y)*z,t*z,t*z);
         root.getChildren().add(l1);
         root.getChildren().add(l2);
         root.getChildren().add(l3);
@@ -150,11 +157,11 @@ public class draw extends Application{
         root.getChildren().add(t2);
         Text title = new Text();
         title.setText(s4);
-        title.setX(20 + 5*x);
+        title.setX(20 + t*x);
         title.setY(20);
         root.getChildren().add(title);
         
-        Scene scene = new Scene(root, 100 + 10*x, 100 + 10*x);
+        Scene scene = new Scene(root, 100 + z*x, 100 + z*x);
         
         draw.setTitle("Here is your view");
         draw.setScene(scene);

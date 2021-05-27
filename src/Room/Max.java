@@ -14,7 +14,7 @@ public class Max {
         // //make camera list empty
         // r.setCams(cam);
         this.v = Math.round(((1000000 - r.getInObj())/10000*100)/100);
-        this.r = new Room(r.getW(),r.getL(),r.getH());
+        this.r = r;
         this.hAngle = hAngle;
         this.lAngle = lAngle;
     }
