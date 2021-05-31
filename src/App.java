@@ -54,13 +54,13 @@ public class App {
         // r.addCam(c);
         // r.getCams().remove(c);
         // System.out.println(r.getCams().size());
-        ReadFile f = new ReadFile("src/File/input.txt");
-        Room r = f.makeRoom();
+        // ReadFile f = new ReadFile("src/File/input.txt");
+        // Room r = f.makeRoom();
         // ArrayList<Camera> ca = new ArrayList<Camera>();
         // r.setCams(ca);
         // r.addCam(new Camera(0,0,1,90,90));
         // r.getCams().get(0).print();
-        // //System.out.println(r.getCams().get(0).gethAngle());
+        // //System.out.println(r.getCa1ms().get(0).gethAngle());
         // Room r = new Room(20,10,10);
         // Points A = new Points(5, 2.5, 0);
         // Points B = new Points(15, 2.5, 0);
@@ -71,9 +71,11 @@ public class App {
         // r.addCam(new Camera(0, 5, 10,90,90));
         // r.addCam(new Camera(10, 10, 10, 90, 90));
         // System.out.println(r.perLighter());
-        getDraw g = new getDraw(r,5);
-        g.show();
+        // getDraw g = new getDraw(r,5);
+        // g.show();
         // Max m = new Max(r,90,90);
         // m.CameraLimited(3);
+        Menu m = new Menu();
+        m.runMenu();
     }
 }

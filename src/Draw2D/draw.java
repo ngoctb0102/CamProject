@@ -101,7 +101,7 @@ public class draw extends Application{
     }
     public void start(Stage draw) throws Exception{
         //super.init();
-        
+        System.out.println("Drawing please wait ...");
         Group root = new Group();
         //set full plane is dark
         // System.out.println(getX());

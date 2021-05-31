@@ -95,22 +95,21 @@ public class Room {
             if(checkInR(c)){
                 if(c.isInList(Cams)){
                     Cams.add(c);
-                    System.out.println("Added Camera");
                     CamVision(c);
                 }else{
-                    System.out.println("This place is have a camera");
+                    //System.out.println("This place is have a camera");
                 }
             }else{
-                System.out.println("Camera is not in room");
+                //System.out.println("Camera is not in room");
             }
         }else{
-            System.out.println("Camera can't be set here");
+            //System.out.println("Camera can't be set here");
         }
     }
     //add Obj to Room
     public void addObj(Object o){
         if(checkObj(o)){
-            System.out.println("Added Obj");
+            // System.out.println("Added Obj");
             Objs.add(o);
         }else{
             System.out.println("Object is not correct");
@@ -654,9 +653,9 @@ public class Room {
     public double getVolLighted(){
         // ArrayList<Points> lPoints = new ArrayList<Points>();
         double vol = 0;
-        for(int i = 0;i<100;i++){
-            for(int j = 0;j<100;j++){
-                for(int k = 0;k<100;k++){
+        for(int i = 0;i<101;i++){
+            for(int j = 0;j<101;j++){
+                for(int k = 0;k<101;k++){
                     Points T = new Points(w*(double)k/100,l*(double)j/100,h*(double)i/100);
                     if(IsLight(T)){
                         vol = vol + 1;
@@ -668,7 +667,27 @@ public class Room {
     }
     //function get lighted are percentage
     public double perLighter(){
-        double re = getVolLighted()/10000;
+        double re = getVolLighted()/1030301*100;
+        return Math.round(re*100)/100;
+    }
+    //funtion to detect faster !
+    public double getVolLighteds(){
+        // ArrayList<Points> lPoints = new ArrayList<Points>();
+        double vol = 0;
+        for(int i = 0;i<11;i++){
+            for(int j = 0;j<11;j++){
+                for(int k = 0;k<11;k++){
+                    Points T = new Points(w*(double)k/10,l*(double)j/10,h*(double)i/10);
+                    if(IsLight(T)){
+                        vol = vol + 1;
+                    }
+                }
+            }
+        }
+        return vol;
+    }
+    public double perLighters(){
+        double re = getVolLighteds()/1331*100;
         return Math.round(re*100)/100;
     }
     //function get point is in Object
