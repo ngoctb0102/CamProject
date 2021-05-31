@@ -28,6 +28,9 @@ public class Camera extends Points{
     public double getLenght() {
         return Lenght;
     }
+    public Camera(double x, double y, double z) {
+        super(x, y, z);
+    }
     public void setLenght(double lenght) {
         Lenght = lenght;
     }

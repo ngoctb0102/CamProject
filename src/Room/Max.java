@@ -138,6 +138,8 @@ public class Max {
         }
         System.out.println("Room is lighted " + r.perLighter() + "%");
     }
+
+    
     public void CameraUnlimited(){
         getMax();
         ArrayList<Camera> cam = r.getCams();
