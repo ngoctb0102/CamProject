@@ -68,8 +68,8 @@ public class Menu {
         System.out.println("3. Show percentage of room was seen by camera.");
         System.out.println("4. Show projection of room.");
         System.out.println("5. Change the number of cameras in roomn");
-        System.out.println("6. Find the minimum numbers of camera to see all the room.");
-        System.out.println("7. Find the most suitable location in room for existed cameras.");
+        System.out.println("6. Tim so luong cam cuc tieu va vi tri de dat camera sao cho nhin thay nhieu nhat.");
+        System.out.println("7. Tim vi tri dat camera thich hop voi so camera cho truoc");
         System.out.println("8. Quit menu.");
         System.out.println("***********************************************************************");
         System.out.println("Please choose one funtion you want: ");

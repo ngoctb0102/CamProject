@@ -31,65 +31,56 @@ public class Max {
         double l = r.getL();
         double h = r.getH();
         for(int i = 0;i < 11;i++){
-            
-                    Camera ca = new Camera(0,l*(double)i/10,h,hAngle,lAngle);
-                    r.addCam(ca);
-                    // System.out.println("is here 1");
-                    double d = r.perLighters();
-                    //System.out.println(d);
-                    list.add(d);
-                    c.add(ca);
-                    r.getCams().remove(ca);
-                    if(d == v){
-                        return ca;
-                    }
-            
+            for(int j = 0; j < 6;j++){
+                Camera ca = new Camera(0,l*(double)i/10,h - h*(double)j/10,hAngle,lAngle);
+                r.addCam(ca);
+                double d = r.perLighters();
+                list.add(d);
+                c.add(ca);
+                r.getCams().remove(ca);
+                if(d == v){
+                    return ca;
+                }
+            }
         }
         for(int i = 0;i < 11;i++){
-            
-                    Camera ca = new Camera(w,l*(double)i/10,h,hAngle,lAngle);
-                    r.addCam(ca);
-                    // System.out.println("is here 1");
-                    double d = r.perLighters();
-                    //System.out.println(d);
-                    list.add(d);
-                    c.add(ca);
-                    r.getCams().remove(ca);
-                    if(d == v){
-                        return ca;
+            for(int j = 0; j < 6;j++){
+                Camera ca = new Camera(w,l*(double)i/10,h - h*(double)j/10,hAngle,lAngle);
+                r.addCam(ca);
+                double d = r.perLighters();
+                list.add(d);
+                c.add(ca);
+                r.getCams().remove(ca);
+                if(d == v){
+                    return ca;
                 }
-            
-        }
-        for(int i = 0;i < 11;i++){
-            
-                    Camera ca = new Camera(w*(double)i/10,0,h,hAngle,lAngle);
-                    r.addCam(ca);
-                    // System.out.println("is here 1");
-                    double d = r.perLighters();
-                    //System.out.println(d);
-                    list.add(d);
-                    c.add(ca);
-                    r.getCams().remove(ca);
-                    if(d == v){
-                        return ca;
+            }
+        }for(int i = 0;i < 11;i++){
+            for(int j = 0; j < 6;j++){
+                Camera ca = new Camera(w*(double)i/10,0,h - h*(double)j/10,hAngle,lAngle);
+                r.addCam(ca);
+                double d = r.perLighters();
+                list.add(d);
+                c.add(ca);
+                r.getCams().remove(ca);
+                if(d == v){
+                    return ca;
                 }
-            
-        }
-        for(int i = 0;i < 11;i++){
-            
-                    Camera ca = new Camera(w*(double)i/10,l,h,hAngle,lAngle);
-                    r.addCam(ca);
-                    // System.out.println("is here 1");
-                    double d = r.perLighters();
-                    //System.out.println(d);
-                    list.add(d);
-                    c.add(ca);
-                    r.getCams().remove(ca);
-                    if(d == v){
-                        return ca;
+            }
+        }for(int i = 0;i < 11;i++){
+            for(int j = 0; j < 6;j++){
+                Camera ca = new Camera(w*(double)i/10,l,h - h*(double)j/10,hAngle,lAngle);
+                r.addCam(ca);
+                double d = r.perLighters();
+                list.add(d);
+                c.add(ca);
+                r.getCams().remove(ca);
+                if(d == v){
+                    return ca;
                 }
-            
+            }
         }
+        
         // for(int i = 0;i < 10;i++){
         //     Camera ca = new Camera(w*(double)i/10,l,h,hAngle,lAngle);
         //     r.addCam(ca);
@@ -208,3 +199,4 @@ public class Max {
         System.out.println("Room is lighted " + r.perLighter() + "%");
     }
 }
+
