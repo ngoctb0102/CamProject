@@ -46,6 +46,9 @@ public class Camera extends Points{
         lAngle = Math.toRadians(langle/2);
         Lenght = 1000;
     }
+    public Camera(double x, double y, double z) {
+        super(x, y, z);
+    }
     // public Camera(String s){
     //     String[] a = s.split(" ");
     //     String[] arg = a[0].replace(")", "").replace("(", "").split(",");

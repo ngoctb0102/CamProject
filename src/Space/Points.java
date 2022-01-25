@@ -37,7 +37,7 @@ public class Points{
     public Points() {
     } 
     public void print(){
-        System.out.println(x + " " + y + " " + z); 
+        System.out.print(x + " " + y + " " + z); 
     }
     // public Points(String s){
     //     System.out.println(s);

@@ -1,14 +1,14 @@
-## Getting Started
+# Camera detect oop project
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+### About project
+- language : Java 🎃
+- Library : JavaFx, Java basic library
 
-## Folder Structure
+### Function
+- Make room with input file or input by hand 🏠
+- Check if the point in room is being seen or not 📷
+- Get percentage of lighted room
+- Detect position of camera to view most of room
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-## Dependency Management
-
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+### Team detail
+- Contact me leader at link <a href="https://www.facebook.com/darkness1331311/">click here</a>
